@@ -32,7 +32,25 @@ Router.route('/',{
   }
 });
 
-
+Router.route('/brainstorm1/:concept1/:concept2',{ // /images2filter/:metaphorPair_id
+  name: "brainstorm1",
+  template: 'brainstorm1',
+  /*
+  layoutTemplate: 'standardLayout',
+  yieldTemplates: {
+      'header': {to: 'header'}
+  },
+  */
+  waitOn: function() {
+    //Meteor.subscribe("articles");
+    //Charlie added
+    //Meteor.subscribe("jokes");
+  },
+  data: function(){
+      Session.set('activeTab', "brainstorm1")
+      return {}
+  }
+});
 
 
 Router.route('/images1filter/:concept1/:concept2',{ // /images2filter/:metaphorPair_id

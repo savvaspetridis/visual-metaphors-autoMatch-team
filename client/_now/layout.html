@@ -34,7 +34,13 @@
             <ul class="nav navbar-nav">      
                
                 {{#if isRealTasks}}
-                
+                <li class="{{isActive 'brainstorm1'}}"> 
+                  <a><span 
+                            class="brainstorm1 " style="cursor: pointer"
+                            data-tab="brainstorm1"
+                            >
+                  Brainstorm: {{metaphorPair.concept1}} </span></a>
+                </li>
               <!-- <li class="{{isActive 'images1find'}}"> 
                   <a><span 
                             class="images1find " style="cursor: pointer"

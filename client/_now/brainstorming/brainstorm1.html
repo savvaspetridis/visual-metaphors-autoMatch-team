@@ -1,0 +1,142 @@
+<template name="brainstorm1">
+  {{> header1}} 
+  <div class="main" style="padding-top: 50px">    
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          
+          
+          {{> brainstorm1_header}}
+
+          {{> listBrainstorm1_object}}
+          {{> addBrainstorm1_object}}
+
+          {{> listBrainstorm1_setting}}
+          {{> addBrainstorm1_setting}}
+
+          
+
+        </div>
+      </div>       
+    </div>        
+  </div>
+</template>
+
+
+
+<template name="brainstorm1_header">
+    <br>
+    <div class="row">
+        <div class="col-md-9">
+            <button class='btn instructions'>Instructions</button>
+            <div class="taskheader">                
+              Brainstorm Associations for <span class="conceptName">{{concept}}</span>              
+            </div>
+        </div>
+        <div class="col-md-3">                                         
+        </div>        
+    </div>    
+</template>
+
+
+<!-- OBJECT -->
+<template name="listBrainstorm1_object">
+  <div class="row">   
+    <div class="col-md-3">
+        Objects:
+
+       {{#each brainstorm_object}}
+        <div class="rowspacer">
+            <div class="row">
+                <div class="col-md-2">
+                    {{idea}}
+                </div>
+                <div class="col-md-4">
+                    <div style="max-height: 300px;" ><img src="{{url}}" style="width: 100%"/></div>
+                </div>
+                <div class="col-md-3">
+                    {{> quickRemoveButton collection=Collections.Brainstorm1 _id=this._id class="btn btn-sm btn-danger del_brainstorm"}}
+                </div>
+            </div>
+        </div>
+        {{/each}} 
+    </div>
+  </div>
+</template>
+
+
+<template name="addBrainstorm1_object">  
+    {{#autoForm id="insertBrainstorm1_object" type="insert" collection=Collections.Brainstorm1}}  
+    <div class="row">   
+        <div class="col-md-4">
+            <div class="form-group {{#if afFieldIsInvalid name='idea'}}has-error{{/if}}">
+                <!--<label class="control-label">{{afFieldLabelText name='idea'}}</label>-->
+                {{> afFieldInput name='idea'}}
+
+                {{#if afFieldIsInvalid name='idea'}}
+                <span class="help-block">{{afFieldMessage name='idea'}}</span>
+                {{/if}}      
+            </div>           
+        </div>      
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <br>
+                <button type="submit" class="btn btn-primary">Add Image</button>
+                <button type="reset" class="btn btn-default">Reset Form</button>
+            </div>
+        </div>  
+    </div>    
+    {{/autoForm}}  
+</template>
+
+<!-- SETTING -->
+<template name="listBrainstorm1_setting">
+  <div class="row">   
+    <div class="col-md-3">
+        Settings:
+
+       {{#each brainstorm_setting}}
+        <div class="rowspacer">
+            <div class="row">
+                <div class="col-md-2">
+                    {{idea}}
+                </div>
+                <div class="col-md-4">
+                    <div style="max-height: 300px;" ><img src="{{url}}" style="width: 100%"/></div>
+                </div>
+                <div class="col-md-3">
+                    {{> quickRemoveButton collection=Collections.Brainstorm1 _id=this._id class="btn btn-sm btn-danger del_brainstorm"}}
+                </div>
+            </div>
+        </div>
+        {{/each}} 
+    </div>
+  </div>
+</template>
+
+
+<template name="addBrainstorm1_setting">  
+    {{#autoForm id="insertBrainstorm1_setting" type="insert" collection=Collections.Brainstorm1}}  
+    <div class="row">   
+        <div class="col-md-4">
+            <div class="form-group {{#if afFieldIsInvalid name='idea'}}has-error{{/if}}">
+                <!--<label class="control-label">{{afFieldLabelText name='idea'}}</label>-->
+                {{> afFieldInput name='idea'}}
+
+                {{#if afFieldIsInvalid name='idea'}}
+                <span class="help-block">{{afFieldMessage name='idea'}}</span>
+                {{/if}}      
+            </div>           
+        </div>      
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <br>
+                <button type="submit" class="btn btn-primary">Add Image</button>
+                <button type="reset" class="btn btn-default">Reset Form</button>
+            </div>
+        </div>  
+    </div>    
+    {{/autoForm}}  
+</template>
