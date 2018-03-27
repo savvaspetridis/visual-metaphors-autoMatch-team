@@ -1,0 +1,202 @@
+<template name="instructionsIntro">
+    <h2> What Are Visual Metaphors?</h2>
+
+    <p>
+        Visual Metaphors are images which show two objects simultaneously.<br>
+        Here are some examples:  
+    </p>
+
+    <div class="row">
+        <div class="col-md-3">
+            <img src="https://s3.amazonaws.com/blending_ads_v1/31999faa1541a44347337ae91113f760.jpg"> 
+            <span class="goalTitle">
+                <br>
+                1) Tabasco bottle <br>
+                2) fire extinguisher</span> <br>
+        </div> 
+
+        <div class="col-md-3">
+            <!--(representing "health/exercise").<br>-->
+            <img src="https://s3.amazonaws.com/blending_ads_v1/16bd4634048a07cd1bbd5c36d16735d2.jpg">
+            <span class="goalTitle">
+                <br>
+                1) Nike shoes <br>
+                2) lungs </span> <br>
+        </div> 
+
+        <div class="col-md-3">
+            <!--(representing orange flavor)<br>-->
+            <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/BlendingWholeToMain/1e7556c43b8d6ccaa8269b89b583a614.jpg"> 
+
+            <span class="goalTitle">
+                <br>
+                1) Orange <br>
+                2) teapot </span> <br>
+        </div> 
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                Each object in the image represents something.<br>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            A Tabasco bottle = Tabasco sauce<br>
+            A fire exinguisher = "hot"<br>           
+        </div>
+        <div class="col-md-3">
+            Nike shoes = Nike Brand <br>
+            Lungs = "heathly" <br>
+        </div>
+        <div class="col-md-3">
+            An orange = orange flavor<br>
+            A teapot = tea.<br>
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                Each of these pictures is a metaphor because they can be interpreted as:
+            </p>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            "Tabasco sauce is hot"          
+        </div>
+        <div class="col-md-3">
+            "Nike will make you healthy"
+        </div>
+        <div class="col-md-3">
+            "This tea tasta like orange"
+        </div>
+    </div>    
+
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                The interpretation of these images is subjective, but many people with the necessarly background can understand these.
+            </p>
+            <p>
+                Making visual metaphors is a fun challenge that we will be asking you to do.<br>
+                We will give you two concepts, like "Nike" and "Heathly", and we want you to give us two images that we can blend together to form a visual metaphors.
+                <br>
+                <br>
+                Some pairs are harder than others. Just do your best. 
+
+                <br>
+                Before you start, here are some more examples of visual metaphors. <br>
+                Please tell us what you think the two objects are<br>
+
+            </p>
+        </div>
+    </div>
+
+    {{#each examples}}
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{url}}" /><br>
+        </div>        
+        <div class="col-md-3">
+            Object 1: <input type="text" class="form-control nameObject" data-url="{{url}}" data-input="1"><br>
+
+            Object 2: <input type="text" class="form-control nameObject" data-url="{{url}}" data-input="2"><br>
+            <br>
+            <button class="btn btn-primary show">Show</button><br>
+            <div class="answers" style="display:none">          
+                <i>(In any order)</i><br>
+                <b>{{concept1}}<br>
+                    {{concept2}}<br></b>
+            </div>  
+        </div>          
+    </div>
+    {{/each}}
+
+
+    <div class="centeredDiv">
+        <button class="done btn btn-success"  data-template="instructionsIntro" data-concept="none"> Done </button> 
+    </div>    
+    <br>
+    <br>
+    <br>
+
+    <!--
+<div class="row">
+<div class="col-md-2">
+<span class="goalTitle">Ideas to combine</span>
+</div>
+<div class="col-md-3">
+<span class="goalTitle">Simple Whole Shape, no parts  </span> 
+</div>
+<div class="col-md-3">
+<span class="goalTitle">Simple Shape with parts</span>
+</div> 
+<div class="col-md-3">
+<span class="goalTitle">Combination </span> 
+</div> 
+</div>
+
+<div class="row">
+<div class="col-md-2">
+<h3>Tabasco Bottle + Fire Extinguisher</h3>
+</div>
+<div class="col-md-3">
+<img class="iconicImg" src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/goal/preview-red.jpg">
+</div>
+<div class="col-md-3">
+<img class="iconicImg" src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/goal/5fa4193a-3137-4e09-b5ab-3fba667619cd_1000.jpg">
+</div> 
+<div class="col-md-3">
+<img class="iconicImg" src="https://s3.amazonaws.com/blending_ads_v1/31999faa1541a44347337ae91113f760.jpg">
+</div> 
+</div>
+
+<div class="row">
+<div class="col-md-2">
+<h3>Shoes + Lungs</h3>
+</div>
+<div class="col-md-3">
+<img class="iconicImg" src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/goal/Nike-Shoes-925792626-8196782-1.jpg">
+</div>
+<div class="col-md-3">
+<img class="iconicImg" src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/goal/lungs-2ivfnn4.png">
+</div> 
+<div class="col-md-3">
+<img class="iconicImg" src="https://s3.amazonaws.com/blending_ads_v1/16bd4634048a07cd1bbd5c36d16735d2.jpg">
+</div>   
+</div>
+
+<div class="row">
+<div class="col-md-2">
+<h3>Orange + Teapot</h3>
+</div>
+<div class="col-md-3">
+<img class="iconicImg" src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/goal/rCjJcEgTAnWxY4Ck.large">
+</div>
+<div class="col-md-3">
+<img class="iconicImg" src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/goal/teadtpt1000028854_-00_englishteastore-brand-6-cup-teapot-blue-gloss-finish.jpg">
+</div> 
+<div class="col-md-3">
+<img class="iconicImg" src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/1e7556c43b8d6ccaa8269b89b583a614.jpg">
+</div> 
+</div>
+
+-->
+
+
+
+
+
+
+</template>

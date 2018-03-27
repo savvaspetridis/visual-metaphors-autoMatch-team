@@ -1,0 +1,8 @@
+{
+  "galaxy.meteor.com": { 
+     "env": { 
+       "ROOT_URL": "http://visualmetaphors.meteorapp.com",  
+       "MONGO_URL": "mongodb://admin:humortools2000@ds113570-a0.mlab.com:13570,ds113570-a1.mlab.com:13570/visualmetaphors1?replicaSet=rs-ds113570" 
+     } 
+   }
+}

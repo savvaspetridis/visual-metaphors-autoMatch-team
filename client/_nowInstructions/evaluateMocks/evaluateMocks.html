@@ -1,0 +1,93 @@
+<template name="instructionsEvaluateMocks">
+
+{{> evaluateMocksIntro}}
+{{> evaluateMocksExamples}}
+{{> evaluateMocksExercise}}
+
+</template>
+
+
+<template name="evaluateMocksIntro">
+    <h1>Evaluating Mock-Ups Of Blends</h1>
+
+    <p>
+    Now you have seen how two images that share a shape can be blended together with our simple tool.<br>
+    However, when we have many annotated images, <b>we can automatically detect</b> which pairs of images can be blended together based on a shared shape and size.
+    </p>
+
+    <p>
+    We would like you to <b>evaluate the automated blends</b>.
+
+    Tell us: <br>
+    1. Is Object A identifiable? <br>
+    2. Is Object B identifiable? <br>
+    3. Do the the shape-part of the objects look like they could be blended together? <br>   
+    </p>
+
+
+</template>
+
+
+<template name="evaluateMocksExamples">    
+     <h2> Examples </h2>
+
+     Object A and B not identifiable.
+</template>
+
+
+
+<template name="evaluateMocksExercise">
+    <br><br><br><br><br><br><br><br>
+
+
+    <h2> Exercise: Evaluating Mock-Ups </h2>
+
+    <p>
+    Now try classifying the highlighted shapes for yourself. <br>
+    Compare your answer to our answer. 
+
+    </p>
+
+
+    {{#each exercises}}
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+        <div class="col-md-6">
+        Shape:
+            <select id="select-{{url}}">
+                <option value="select" data-url="{{url}}">(select)</option>
+                <option value="box" data-url="{{url}}">Box (with depth)</option>
+                <option value="rectangle" data-url="{{url}}">Rectangle (flat)</option>
+                <option value="sphere" data-url="{{url}}">Sphere (with depth)</option>
+                <option value="circle" data-url="{{url}}">Circle (flat)</option>
+                <option value="cylinder" data-url="{{url}}">Cylinder (with depth)</option>
+                <option value="other" data-url="{{url}}">other</option>
+            </select>
+            <button class="submitShapeExercise btn btn-primary" data-url="{{url}}" data-answer="{{shape}}">Submit</button>
+            
+            <div class="answerCorrect" style="display:none" >          
+                <b>Correct!</b><br>
+                <span class="correctFeedback"></span>
+            </div> 
+            <div class="answerInCorrect" style="display:none" >          
+                <b>We disagree</b><br>
+                <span class="incorrectFeedback"></span>
+
+
+            </div> 
+
+
+        </div>          
+    </div>
+    {{/each}}
+
+        <div class="centeredDiv">
+        <button class="done btn btn-success"  data-template="instructionsIntro" data-concept="none"> Next </button> 
+    </div>    
+    <br>
+    <br>
+    <br>
+</template>
+

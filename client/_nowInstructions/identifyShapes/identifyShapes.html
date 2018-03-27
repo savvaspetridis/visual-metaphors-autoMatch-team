@@ -1,0 +1,155 @@
+<template name="instructionsIdentifyShapes">
+
+{{> identifyShapesIntro}}
+{{> identifyShapesExamples}}
+{{> identifyShapeExercise}}
+
+</template>
+
+
+<template name="identifyShapesIntro">
+    <h1>Identifying Shapes of Objects</h1>
+
+    <p>
+    In order to make visual blends, we need to first <b>classify individual objects based on their main shape</b>. Later, we will blend two objects based on a shared shape.
+    </p>
+
+    <p>
+    Although objects come in many shapes, we are only dealing with the following five shapes:
+    </p>
+
+
+    <ul>
+    <li><img src="{{iconsURL}}shape-sphere-trans.png" style="height: 26px; width: 62px"> Sphere</li>
+    <li><img src="{{iconsURL}}shape-circle-trans.png" style="height: 26px; width: 62px"> Circle (flat)</li>
+    <li><img src="{{iconsURL}}shape-box-trans.png" style="height: 26px; width: 62px"> Box</li>
+    <li><img src="{{iconsURL}}shape-rectangle-trans.png" style="height: 26px; width: 62px"> Rectangle (flat)</li>
+    <li><img src="{{iconsURL}}shape-cylinder-trans.png" style="height: 26px; width: 62px"> Cylinder</li>
+    </ul>
+
+    <p>
+    Three of the shapes are have depth (sphere, box, and cylinder), two of the shapes are more flat (circle and rectangle). The flat objects can be three dimensional, yet with little depth, like a sheet of paper, or a cookie. Of course, there is some room for interpretation. 
+    </p>
+
+    <p>
+    Here are examples of each shape with the part of the object highlighted in <span style="color: green; font-weight: bold">green</span> or <span style="color: red; font-weight: bold">red</span>. Look at these examples, then try classifying the shape of some objects for yourself.
+    </p>
+</template>
+
+
+<template name="identifyShapesExamples">    
+    <h3><img src="{{iconsURL}}shape-sphere-trans.png" style="height: 26px; width: 62px">Sphere (deep)</h3>
+    <div class="row">
+        {{#each sphereExamples}}
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+         {{/each}}
+    </div>
+
+    <h3><img src="{{iconsURL}}shape-circle-trans.png" style="height: 26px; width: 62px">Circle (flat)</h3>
+    <div class="row">
+        {{#each circleExamples}}
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+         {{/each}}
+    </div>
+
+    <h3><img src="{{iconsURL}}shape-box-trans.png" style="height: 26px; width: 62px">Box (deep)</h3>
+    <div class="row">
+        {{#each boxExamples}}
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+         {{/each}}
+    </div>
+
+    <h3><img src="{{iconsURL}}shape-rectangle-trans.png" style="height: 26px; width: 62px">Rectangle (flat)</h3>
+    <div class="row">
+        {{#each rectExamples}}
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+         {{/each}}
+    </div>
+
+
+
+
+    <h3><img src="{{iconsURL}}shape-cylinder-trans.png" style="height: 26px; width: 62px">Cylinder (deep)</h3>
+    <div class="row">
+        {{#each cylinderExamples}}
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+         {{/each}}
+    </div>   
+
+    <h3>Other shapes</h3>
+    <div class="row">
+        {{#each otherShapeExamples}}
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+         {{/each}}
+    </div>   
+</template>
+
+
+
+<template name="identifyShapeExercise">
+    <br><br><br><br><br><br><br><br>
+
+
+    <h2> Exercise: Classify Shapes </h2>
+
+    <p>
+    Now try classifying the highlighted shapes for yourself. <br>
+    Compare your answer to our answer. 
+
+    </p>
+
+
+    {{#each exercises}}
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+        <div class="col-md-6">
+        Shape:
+            <select id="select-{{url}}">
+                <option value="select" data-url="{{url}}">(select)</option>
+                <option value="sphere" data-url="{{url}}">Sphere (deep)</option>
+                <option value="circle" data-url="{{url}}">Circle (flat)</option>
+                <option value="box" data-url="{{url}}">Box (deep)</option>
+                <option value="rectangle" data-url="{{url}}">Rectangle (flat)</option>                
+                <option value="cylinder" data-url="{{url}}">Cylinder (deep)</option>
+                <option value="other" data-url="{{url}}">other</option>
+            </select>
+            <button class="submitShapeExercise btn btn-primary" data-url="{{url}}" data-answer="{{shape}}">Submit</button>
+            
+            <div class="answerCorrect" style="display:none" >          
+                <b>Correct!</b><br>
+                <span class="correctFeedback"></span>
+            </div> 
+            <div class="answerInCorrect" style="display:none" >          
+                <b>We disagree</b><br>
+                <span class="incorrectFeedback"></span>
+
+
+            </div> 
+
+
+        </div>          
+    </div>
+    {{/each}}
+
+        <div class="centeredDiv">
+        <button class="done btn btn-success"  data-template="instructionsIntro" data-concept="none"> Next </button> 
+    </div>    
+    <br>
+    <br>
+    <br>
+</template>
+

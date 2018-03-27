@@ -1,0 +1,4 @@
+.example_image{
+	max-height: 100%; /* 300px; */
+	max-width: 100%; /* 300px; */
+}

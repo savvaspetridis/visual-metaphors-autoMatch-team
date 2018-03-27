@@ -1,0 +1,205 @@
+<template name="combinePairsRevert2">
+    {{> header1}} 
+    <div class="main" style="padding-top: 50px">    
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-12'>
+                    {{> insertCombinePairsRevert2}}
+                </div>
+            </div> 
+
+        </div>        
+    </div>
+</template>
+
+
+
+<template name="insertCombinePairsRevert2">
+     <br>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="taskheaderCombine">
+            <button class='btn instructions'>Instructions</button>
+            
+
+                Combine <span class="conceptName">{{metaphorPair.concept1}} </span> and
+                <span class="conceptName">{{metaphorPair.concept2}} </span> 
+                
+
+            </div>
+        </div>
+        <div class="col-md-3">
+            Progress: <b>{{countImages}} / 5 </b> 
+            <button class="done btn btn-success"  data-template="combinePairs" data-concept="{{metaphorPair.concept_id}}"> Done </button>             
+        </div>        
+    </div>
+    
+    
+    
+    
+    <div class="row">
+        <div class="col-md-3">
+            
+            <div style="position: fixed">
+                <h3>{{metaphorPair.concept1}}  </h3> 
+                Filters:
+                <div class="image1filters" data-toggle="buttons-radio">
+                    <button type="button" class="btn btn-default" data-filter="all">All ({{countImages1.all}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="whole">Whole Object ({{countImages1.whole}})</button>
+                    <br>
+
+                    <button type="button" class="btn btn-default" data-filter="circle">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/circle-20px.png" class="basicShapeIcon">
+
+                        ({{countImages1.circle}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="rectangle">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/rectangle-20px.png" class="basicShapeIcon">
+
+
+                        ({{countImages1.rectangle}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="triangle">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/triangle-20px.png" class="basicShapeIcon">
+
+
+                        ({{countImages1.triangle}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="polygon">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/polygon-20px.png" class="basicShapeIcon">
+
+                        ({{countImages1.polygon}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="other">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/other-20px.png" class="basicShapeIcon">
+
+                        ({{countImages1.other}})</button>
+                </div>
+            </div>
+
+
+            <div id="image1container">
+                {{#each images1}}                 
+                <div class= "imageContainer image1Container" >
+                    <img src="{{url}}" style="width: 100%"/><br>
+                    {{label}}                      
+                </div>               
+                {{/each}} 
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+            <div style="position: fixed">
+                <h3>{{metaphorPair.concept2}}</h3>
+                Filters:
+                <div class="image2filters" data-toggle="buttons-radio">
+                    <button type="button" class="btn btn-default" data-filter="all">All ({{countImages2.all}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="iconic">Main + Secondary ({{countImages2.main}})</button>
+                    
+                    <br>
+                    
+                    <button type="button" class="btn btn-default" data-filter="circle">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/circle-20px.png" class="basicShapeIcon">
+                        ({{countImages2.circle}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="rectangle">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/rectangle-20px.png" class="basicShapeIcon">
+                        ({{countImages2.rectangle}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="triangle">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/triangle-20px.png" class="basicShapeIcon">
+                        ({{countImages2.triangle}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="polygon">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/polygon-20px.png" class="basicShapeIcon">
+
+                        ({{countImages2.polygon}})</button>
+
+                    <button type="button" class="btn btn-default" data-filter="other">
+                        <img src="https://dl.dropboxusercontent.com/u/435980/visual-metaphors-images/shape-icons/other-20px.png" class="basicShapeIcon">
+
+                        ({{countImages2.other}})</button>
+                </div>
+            </div>
+
+            <div id="image2container">
+                {{#each images2}}                 
+                <div class= "imageContainer image2Container" >
+                    <img src="{{url}}" style="width: 100%"/><br>
+                    {{label}}                      
+                </div>               
+                {{/each}}  
+            </div>
+        </div>
+
+
+
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <div style="position: fixed">
+                <h3>Combination: Whole to Main Part</h3>
+                <div id="pairsPreview">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="image-selected-placeholder">
+                                {{#if image1selected.hasImage}}
+                                <img src="{{image1selected.url}}" class="selectedImageContainer"/>
+                                {{else}}
+                                Please select an image
+                                {{/if}}
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="image-selected-placeholder">
+                                {{#if image2selected.hasImage}}
+                                <img src="{{image2selected.url}}" class="selectedImageContainer"/>
+                                {{else}}
+                                Please select an image
+                                {{/if}}
+
+                            </div>                    
+                        </div>
+                    </div>
+                </div>    
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4">
+                        <button id="addPair" class="done btn btn-success">Add</button>
+                        <button id="clearSelectedPair" class="done btn btn-default">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pairscontainer">
+                {{#each pairs}}
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="{{this.image1_obj.url}}" class="imageContainer"/>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{{this.image2_obj.url}}" class="imageContainer"/>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="removePair done btn btn-danger">X</button>
+                    </div>
+
+                </div>
+                {{/each}}
+            </div>
+
+
+
+
+        </div>
+
+    </div>    
+
+
+
+
+
+</template>

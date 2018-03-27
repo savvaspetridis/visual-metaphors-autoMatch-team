@@ -1,0 +1,113 @@
+<template name="instructionsShapeCoverage">
+    {{> shapeCoverageIntro}}
+    {{> shapeCoverageExercise}}
+    
+</template>
+
+<template name="shapeCoverageIntro">
+    <h1>Shape Coverage: All or Part of the Object</h1>
+    <p>
+    Once we know what shape best describes an object, we need to know whether the shape covers <b>all</b> of the object or <b>part</b> of the object.
+    </p>
+    <p>
+    If the shape covers only part of the object, that means there are other parts of the object outside the shape.<br>
+    For example, here are objects where the shape covers all of the object, and where the shape covers part of the object.
+    </p>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="imageAndSentenceTile">
+                <b>All</b> of the object<br>
+                <img class="iconicImg" src="{{baseURL}}cookie.png"><br>
+
+            </div> 
+
+
+            <div class="imageAndSentenceTile">
+                <b>Part</b> of the object<br> 
+                <img class="iconicImg" src="{{baseURL}}cooler.png"><br>
+
+
+
+            </div> 
+
+
+        </div>
+    </div>
+    <br>
+    <p>
+    <b>Note:</b> The cookie is not perfectly circular, and so some of the cookie sticks out from the red circle. This is okay. There are no perfectly circular cookies, but we all know that this is cookie is basically circular. <b>The parts of the cookie that extrude past the circle aren't that important</b>. Thus, for the cookie, the shape covers all of the object.    
+    </p>
+    <p>
+    However, the <b>handle of the cooler is an important part of the object that lies outside the main box shape</b> of the object. Thus, for the cooler, the shape covers part of the object.
+    </p>
+</template>
+
+<template name="shapeCoverageExercise">
+    <br>
+    <br>
+    <br>
+    <h2>Exercise: Classify Shape Coverage</h2>
+       <p>
+    Now try classifying shaped drawn on objects for yourself. <br>
+    Compare your answer to our answer. 
+
+    </p>
+    <p>
+        For each of objects, tell us where the shape covers: 
+        <ul>
+            <li>All of the object</li>
+            <li>Part of the object</li>
+            <li>other</li>
+        </ul>
+    </p>
+    <p>
+    Examples:
+    </p>
+
+
+
+
+
+    {{#each examples}}
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{baseURL}}{{url}}" class="example_image"/><br>
+        </div>        
+        <div class="col-md-6">
+        
+
+        Shape covers:
+            <select id="select-{{url}}">
+                <option value="select" data-url="{{url}}">(select)</option>
+                <option value="whole" data-url="{{url}}">All of the object</option>
+                <option value="part" data-url="{{url}}">Part of the object</option>
+                <!-- <option value="other" data-url="{{url}}">other</option> -->
+            </select>
+            <button class="submitWholeOrPartExercise btn btn-primary" data-url="{{url}}" data-answer="{{wholeOrPart}}">Submit</button>
+            
+            <div class="answerCorrect" style="display:none" >          
+                <b>Correct!</b><br>
+                <span class="correctFeedback"></span>
+            </div> 
+            <div class="answerInCorrect" style="display:none" >          
+                <b>We disagree</b><br>
+                <span class="incorrectFeedback"></span>
+
+
+            </div> 
+
+
+        </div>          
+    </div>
+    {{/each}}
+
+
+    <div class="centeredDiv">
+        <button class="done btn btn-success"  data-template="instructionsIntro" data-concept="none"> Next </button> 
+    </div>    
+    <br>
+    <br>
+    <br>
+
+</template>

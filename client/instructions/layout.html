@@ -1,0 +1,81 @@
+<template name="standardLayout">
+  {{> yield region="header"}}
+  <div class="main" style="padding-top: 50px">
+    
+  <div class='container'>
+    <div class='row'>
+      <div class='col-md-12'>
+        {{> yield}}
+      </div>
+    </div> 
+    
+  </div>     
+    
+    
+  </div>
+</template>
+
+
+
+
+<template name='header'> 
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand active" href="/">Visual Blends</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">      
+            <!--  
+            <li> <a><span class="goTo" data-type="goal" style="cursor: pointer">Intro</span></a></li>
+            <li> <a><span class="goTo" data-type="images1" style="cursor: pointer">Finding Brand Images</span></a></li>
+            <li> <a><span class="goTo" data-type="filteringimages1" style="cursor: pointer">Filtering Brand Images</span></a></li>
+            
+            <li> <a><span class="goTo" data-type="representConcept" style="cursor: pointer">Representing Abstract Concepts</span></a></li>
+            
+            
+            <li> <a><span class="goTo" data-type="images2" style="cursor: pointer">Finding Concept Images</span></a></li>
+            <li> <a><span class="goTo" data-type="filteringimages2" style="cursor: pointer">Filtering Concept Images</span></a></li>
+            -->
+            <!--
+            <li> <a><span class="goTo" data-type="shapes" style="cursor: pointer">Shapes</span></a></li>
+            <li> <a><span class="goTo" data-type="matrix" style="cursor: pointer">Matrix</span></a></li>
+            -->
+            
+            <!--
+            <li class="dropdown">
+              <a href="/insults" data-toggle="dropdown" class="dropdown-toggle">Insults <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/insultInstructions">Instructions</a></li>
+                  <li><a id="analyzeInsult" style="cursor: pointer">Analyze!</a></li>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="/insults" data-toggle="dropdown" class="dropdown-toggle">Connect the Dots <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/connectTheDotsInstructions">Instructions</a></li>
+                  <li><a id="analyzeConnectTheDots" style="cursor: pointer">Analyze!</a></li>
+              </ul>
+            </li>
+            -->
+          </ul>
+          
+                <ul class="nav navbar-nav navbar-right">
+               {{> loginButtons }} 
+          </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</template>
+

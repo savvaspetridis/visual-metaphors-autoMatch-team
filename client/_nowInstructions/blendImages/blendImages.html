@@ -1,0 +1,222 @@
+<template name="instructionsBlendImages">
+    <div>
+    
+    {{> blendImagesIntro}}
+    
+    {{> blendImagesExercises}}
+
+    <!--
+    <h2>Summary </h2>
+    Now you have seen how objects that share a shape can be combined to create a visual blend.
+
+    Now when you find and and classify objects for future blends, you see how things fit together.
+
+    Next you will annotate some real shapes, and find shapes for new concepts.
+    -->
+    </div>
+</template>
+
+<template name="blendImagesIntro">
+    <h1>Blending Images </h1>
+    <p>
+    Now that the images have been classified by shape and shape coverage, we can make visual blends. 
+    </p>
+
+    <p>
+    Visual Blends are based on combining <b>two objects with the same shape</b>. <br>
+    Here is an example of blending two objects with a <b>sphere</b> shape:
+    </p>
+
+    <img src="{{baseURL}}ice-cream-a-b-final-shape.png" class="threePanelExampleImage" >
+
+    <p>
+    Both Object A (the earth) and Object B (the ice cream cone) share a shape. <b> Both objects have a sphere</b>.<br>
+    In addition to sharing the same shape, notice that:
+    <ul>
+    <li>in Object A, the shape covers <b>all</b> of the object </li>
+    <li>in Object B, the shape covers <b>part</b> (but not all) of the object.</li>
+    </ul> 
+    </p>
+    <p>
+    This is true for many visual blends. Here's an example of two objects that share a <b>cylinder</b>. <br>
+    In Object A, the cylinder covers <b>all</b> of the object, in Object B, the cylinder covers <b>part</b> of the object.
+    </p>
+    <img src="{{baseURL}}tabasco-all-part.png" class="threePanelExampleImage" >
+
+    <p>
+    This is the way we want you to create visual blends. Why? Becuase this method makes it likely to produce successful blends. Blends are successful when <b>both objects are identifiable</b> and yet <b>both objects are blended into one object</b>. Using this method, 
+    </p>
+    <ul>
+        <li>The objects appear blended because they share a shape.</li>
+        <li>Object A is identifiable because its entire shape is copied into the blend.</li>
+        <li>Object B is identifiable because its parts outside of the shape make it identfiable.</li>
+    </ul>
+
+    <p>
+    Here is an illustration showing why this generally works:
+    </p>
+
+    <img src="{{baseURL}}abstract-all-to-part.png" class="threePanelExampleImage" >
+
+</template>
+
+
+
+
+
+
+
+<template name="blendImagesExercises">
+	<h2>Exercise: Blend Images</h2>
+    Now try making some blends yourself. <br>
+    <ul>
+        <li>For Object A, drag and resize the shape over <b>all</b> of the object</li>
+        <li>For Object B, drag and resize the shape over <b>part</b> of the object</li>
+        <li>A mock-up of the blend should be produced automatically </li>
+        <li>Press <b>"Submit" </b>to see our answer. Hopefully your result is close to ours, but it is subjective, so we don't expect it to be exact.</li>
+    </ul>
+    Your blends will not be as compelling as these professional examples. But they will be a mock-up of a blend on which an artist can complete the details.
+
+	{{#each exercises}}
+	    {{> blendImagesExercise}}
+	{{/each}}
+    <div class="centeredDiv">
+        <button class="done btn btn-success"  data-template="instructionsIntro" data-concept="none"> Next </button> 
+    </div>    
+    <br>
+    <br>
+    <br>
+</template>
+
+<template name="blendImagesExercise" >
+    <div class="container blendExerciseContainer">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="blendExerciseHeader"><u>Object A</u><br>
+                Shape: <b>{{shape}}</b><br>
+                Coverage: <b>All</b> of Object</div>
+                <canvas id="a_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+                <!--
+                {{a_object.turk_data_shape}}<br>                
+                {{a_object.wholeOrMain}}<br>
+                {{a_object.turk_data_votes}}<br>
+                -->
+            </div>
+            <div class="col-md-3">
+                <div class="blendExerciseHeader"><u>Object B</u><br>
+                Shape: <b>{{shape}}</b><br>
+                Coverage: <b>Most</b> of Object</div>
+                <canvas id="b_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+                <!--
+                {{b_object.turk_data_shape}}<br>                
+                {{b_object.wholeOrMain}}<br>
+                {{b_object.turk_data_votes}}
+                {{b_object.url}}<br>
+                -->
+                
+            </div>
+
+            <div class="col-md-3">
+                <div class="blendExerciseHeader"><u>Visual Blend</u><br>
+                <br>
+                <br>
+                </div>
+                <canvas id="mix_canvas_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+                <!--<button id="dontautoblend_{{unique_id}}">Don't autoblend</button>
+                
+                <button class="btn btn-primary" id="submit">Submit</button>-->
+                
+            </div>
+            <div class="col-md-3">
+                <div style="margin-left: 30px;"> 
+                    <div class="blendExerciseHeader">
+                        <u>Sample Answer</u><br>                
+                        <br>
+                        <br>
+                    </div>
+                    <button class="btn btn-primary submitExercise">Submit</button>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="answerBlend" style="display:none">
+                        <img src="{{baseURL}}{{answer_image}}" class="blend_answer_image">
+                     </div>
+                 </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+    </div>  
+</template>
+
+<!--
+
+<template name="blendImagesExercise">
+    <div class="row">
+    	<div class="col-md-4">
+    		<canvas id="canvas_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+    	</div>
+    
+    	<div class="col-md-6">
+		Shape:
+        <select id="select-shape-{{url}}" class="select_shape">
+                <option value="select" data-url="{{url}}">(select)</option>
+                <option value="box" data-url="{{url}}">Box (with depth)</option>
+                <option value="rectangle" data-url="{{url}}">Rectangle (flat)</option>
+                <option value="sphere" data-url="{{url}}">Sphere (with depth)</option>
+                <option value="circle" data-url="{{url}}">Circle (flat)</option>
+                <option value="cylinder" data-url="{{url}}">Cylinder (with depth)</option>
+                <option value="other" data-url="{{url}}">other</option>
+            </select>
+        <br>
+        <br>
+
+
+        Shape covers:
+        <select id="select-complexity-{{url}}" class="select_complexity">
+            <option value="select" data-url="{{url}}">(select)</option>
+            <option value="whole" data-url="{{url}}">All of the object</option>
+            <option value="part" data-url="{{url}}">Most of the object</option>
+        </select>
+
+        <button class="submitExercise btn btn-primary" data-url="{{url}}" data-shape="{{shape}}" data-complexity="{{complexity}}">Submit</button>
+            
+
+
+        <div class="answerCorrectShape" style="display:none" >          
+            Shape: <b>Correct!</b><br>
+            <span class="correctFeedback"></span>
+        </div> 
+        <div class="answerInCorrectShape" style="display:none" >          
+            Shape: <b>We disagree</b><br>
+            <span class="incorrectFeedback"></span>
+        </div> 
+        <br>
+
+
+        <div class="answerCorrectComplexity" style="display:none" >          
+            Coverage: <b>Correct!</b><br>
+            <span class="correctFeedback"></span>
+        </div> 
+        <div class="answerInCorrectComplexity" style="display:none" >          
+            Coverage: <b>We disagree</b><br>
+            <span class="incorrectFeedback"></span>
+        </div> 
+        <br>
+        <div class="answerDrawing" style="display:none">
+        	Our shape drawing:
+	        <div style="max-height:200px; max-width: 200px; ">
+	        	<img style="max-height:200px; max-width: 200px; border: 1px solid black" src="{{answerURL}}">        
+	        </div>
+        </div>
+
+        </div> 
+    </div>
+    <br>
+    <br>
+    <br>
+</template>
+-->

@@ -1,0 +1,107 @@
+<template name="autoMatches">
+  {{> header1}} 
+  <div class="main" style="padding-top: 50px">    
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          {{> showAutoMatches}}
+        </div>
+      </div>       
+    </div>        
+  </div>
+
+</template>
+
+<template name="showAutoMatches">
+	<div>
+        <div class="row">
+        <h1>Matches for '{{concept1}}' and '{{concept2}}' ({{count_pairs}})</h1>
+        <p>
+        Based on the shape and coverage annotations, we have <b>automatically calculated</b> which pairs of shapes will blend well.
+        </p>
+        <p>
+        Look at each blend and make adjustments that improve the blend.
+            <ul>
+            <li><b>Adjust</b> the shape drawings to improve the fit of a blend.</li>
+            <li><b>Reclassify</b> shapes and coverages to find more blends.</li>
+            </ul>
+        </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4"><h3>Object A</h3></div>
+            <div class="col-md-4"><h3>Object B</h3></div>
+            <div class="col-md-4"><h3>Blend</h3></div>
+        </div>
+		{{#each pair_mixes}}
+        
+			{{> autoMatch}}
+        
+            
+
+		{{/each}}
+
+        <div class="centeredDiv">
+            <button class="next btn btn-success"  data-template="instructionsIntro" data-concept1="{{concept1}}" data-concept2="{{concept2}}"> Next </button> 
+        </div>    
+        <br>
+        <br>
+        <br>
+	</div>
+</template>
+
+<template name="autoMatch" >
+	<div class="container">
+        
+
+        <div class="row">
+            <div class="col-md-4">
+                <table>
+                    <tr>
+                        <td>Shape:</td><td> <b>{{image_a.shape}}</b> - {{concept1}}</td>
+                    </tr>
+                    <tr>
+                        <td>Coverage: &nbsp;</td><td><b>all</b></td>
+                    </tr>
+                </table>               
+            	<canvas id="a_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+            	<!--
+            	{{a_object.turk_data_shape}}<br>            	
+            	{{a_object.wholeOrMain}}<br>
+            	{{a_object.turk_data_votes}}<br>
+            	-->
+            </div>
+            <div class="col-md-4">
+                <table>
+                    <tr>
+                        <td>Shape:</td><td> <b>{{image_b.shape}}</b></td>
+                    </tr>
+                    <tr>
+                        <td>Coverage: &nbsp;</td><td><b>part</b></td>
+                    </tr>
+                </table> 
+
+            	<canvas id="b_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+            	<!--
+            	{{b_object.turk_data_shape}}<br>            	
+            	{{b_object.wholeOrMain}}<br>
+            	{{b_object.turk_data_votes}}
+            	{{b_object.url}}<br>
+            	-->
+            	
+            </div>
+
+            <div class="col-md-4">
+                <br>
+                <br>
+            	<canvas id="mix_canvas_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+            	<!--<button id="dontautoblend_{{unique_id}}">Don't autoblend</button>-->
+                {{#if inMixes}}
+                    Saved!
+                {{else}}
+                <button id="saveAutoBlend_{{unique_id}}">Save Match</button>
+                <button id="reverseAutoBlend_{{unique_id}}">Reverse</button>
+                {{/if}}
+            </div>
+    	</div>
+    </div>	
+</template>

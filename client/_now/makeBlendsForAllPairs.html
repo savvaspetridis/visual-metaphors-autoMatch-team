@@ -1,0 +1,62 @@
+<template name="makeBlendsForAllPairs">
+	<div >
+	Brand complexity: <b>{{brandComplexity}}</b><br>
+	Concept complexity: <b>{{conceptComplexity}}</b><br>
+	</div>    
+		
+
+
+
+	{{#each pair_data}}
+
+		{{> pair_mixes}}
+	{{/each}}
+	
+
+</template>
+
+<template name="pair_mixes">
+	<div>
+		Brand: {{brand}}<br>
+		Concept: {{concept}}
+
+		{{#each pair_mixes}}
+			{{> a_b_mix_canvases_for_all_pairs}}
+
+		{{/each}}
+	</div>
+</template>
+
+
+<template name="a_b_mix_canvases_for_all_pairs" >
+	<div class="container">
+        <div class="row">
+            <div class="col-md-4">
+            	<canvas id="a_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+            	{{a_object.turk_data_shape}}<br>            	
+            	{{a_object.wholeOrMain}}<br>
+            	{{a_object.turk_data_votes}}<br>
+            </div>
+            <div class="col-md-4">
+            	<canvas id="b_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+            	{{b_object.turk_data_shape}}<br>            	
+            	{{b_object.wholeOrMain}}<br>
+            	{{b_object.turk_data_votes}}
+            	{{b_object.url}}<br>
+            	
+            </div>
+
+            <div class="col-md-4">
+            	<canvas id="mix_canvas_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+            	<button id="dontautoblend_{{unique_id}}">Don't autoblend</button>
+            </div>
+    	</div>
+    </div>	
+</template>
+
+<!--
+<template name="select_object_a_for_pair" >	
+	<canvas id="object_a_{{_id}}" class="selectionCanvas" height="400" width="300"></canvas>
+</template>
+-->
+

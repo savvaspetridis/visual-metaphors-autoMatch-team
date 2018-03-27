@@ -1,0 +1,88 @@
+<template name="instructionsImages1">
+  <h2> Entering Image URLs</h2>
+
+  <div class="row">
+    <div class="col-md-8">
+      <p>
+      We encourage you to use <b>google image search</b> to find object images.
+      </p>
+      <p>
+      When you search, you need to <b>click on the image</b> to get it with a <b>black background</b> like this:
+      </p>
+      <img src="{{baseURL}}search-starbucks-copy.png" style="max-width:600px;">
+      <br>
+      <br>
+      <p>
+      To get the URL, <b>right click</b> on the image and select <b>"Copy Image Address"</b>
+      </p>
+      <p>
+      Then <b>paste</b> that url into the textbox.
+      </p>
+    </div>
+  </div>
+
+  
+
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Practice</h2>
+      <ol>
+      <li>Search <a href="https://images.google.com/" target="_blank">google images </a></li>
+      <li>Copy an image link: 
+        <ul>
+          <li><b>Click</b> on the image to get the <b>black box</b>.</li>
+          <li><b>Right click</b> on the image and select <b>"Copy Image Address"</b></li>    
+          <li><b>Paste</b> image address into this box and press "ok" or enter.</li>
+          <li>If you do it correctly, then the image should <b>appear below</b>. </li>
+        </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-7">
+      Use <a href="https://images.google.com/" target="_blank">google images</a> to find an image of the <b>Starbucks logo</b>.<br>
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      Copy link here:
+    </div>
+    <div class="col-md-6">
+      <input  id="testlink" type="text" size="50"/>
+      <button id="submit" class="btn btn-primary" >Submit</button>
+      <button id="clear_url" class="btn" >Clear</button>
+    </div>
+  </div> 
+
+  <div class="row">
+    <div class="col-md-2">
+     See image here:
+    </div>
+    <div class="col-md-6">
+      <div id="feedback">
+      </div>
+      <img id="targetIMG" src="" style="max-width:100%">
+      <br>
+      <div id="catchAllError" style="display:none;">
+        <span style="color: grey">(If nothing appears here, try copying and paste the url again. <br>
+        If that doesn't work, the URL is probably broken. Just skip it and pick a new one.)<br>
+        </span>
+      </div>
+    </div>
+  </div>  
+
+  <br>
+  <br>
+  <br>
+  <div class="centeredDiv">
+  <button class="done btn btn-success"  data-template="instructionsImages1" data-concept="none"> Next </button> 
+  </div>
+
+  <br>
+  <br>
+  <br>
+</template>

@@ -1,0 +1,19 @@
+.threePanelExampleImage{
+	max-width: 600px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.blendExerciseContainer{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.blendExerciseHeader{
+	font-size: 20px;	
+}
+
+.blend_answer_image{
+	max-height: 300px;
+	max-width: 300px;
+}

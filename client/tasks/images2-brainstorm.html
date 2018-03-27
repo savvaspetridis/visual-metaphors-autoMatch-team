@@ -1,0 +1,186 @@
+<template name="images2brainstorm">
+  {{> header1}} 
+  <div class="main" style="padding-top: 50px">    
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          {{> insertImages2Brainstorm}}
+        </div>
+      </div> 
+      
+    </div>        
+  </div>
+</template>
+
+
+
+<template name="insertImages2Brainstorm">
+  <h2>Brainstorm Associations for {{metaphorPair.concept2}}</h2>
+  Come up with at least 8 things associated with <b>{{metaphorPair.concept2}}</b>.<br>
+  Brainstorm in 4 different categories:
+  <ul>
+    <li>objects</li>
+    <li>people</li>
+    <li>activities</li>
+    <li>settings</li>
+  </ul>
+  <br>
+  Progress: <b>N of 10 images</b><br>
+  <br>
+  
+  
+  {{#autoForm id="insertImages2objects" type="insert" collection=Collections.Images2Brainstorm}}
+  <div class="row">
+    <div class="col-md-2">Objects</div>
+    
+    <div class="col-md-4">
+        <div class="form-group {{#if afFieldIsInvalid name='label'}}has-error{{/if}}">          
+          {{> afFieldInput name='label'}}
+          {{#if afFieldIsInvalid name='label'}}
+          <span class="help-block">{{{afFieldMessage name='label'}}}</span>
+          {{/if}}
+        </div>            
+    </div>      
+    <div class="col-md-3">
+        <div class="form-group">
+          <br>
+          <button type="submit" class="btn btn-primary">Add</button> (or press 'enter')
+          <!--<button type="reset" class="btn btn-default">Clear</button>-->
+        </div>
+      </div> 
+  </div>
+  {{/autoForm}}
+
+  <div class="row">
+    <div class="col-md-2"></div>    
+    <div class="col-md-4">
+      {{#each image2objects}}
+            {{label}}              
+            {{> quickRemoveButton collection=Collections.Images2Brainstorm _id=this._id class="btn btn-sm btn-danger"}}
+            <br>
+      {{/each}}         
+    </div>      
+    <div class="col-md-3"></div>        
+  </div>
+
+
+
+
+
+  {{#autoForm id="insertImages2activity" type="insert" collection=Collections.Images2Brainstorm}}
+  <div class="row">
+    <div class="col-md-2">Activities</div>
+    
+    <div class="col-md-4">
+        <div class="form-group {{#if afFieldIsInvalid name='label'}}has-error{{/if}}">          
+          {{> afFieldInput name='label'}}
+          {{#if afFieldIsInvalid name='label'}}
+          <span class="help-block">{{{afFieldMessage name='label'}}}</span>
+          {{/if}}
+        </div>            
+    </div>      
+    <div class="col-md-3">
+        <div class="form-group">
+          <br>
+          <button type="submit" class="btn btn-primary">Add</button> (or press 'enter')
+          <!--<button type="reset" class="btn btn-default">Clear</button>-->
+        </div>
+      </div> 
+  </div>
+  {{/autoForm}}
+
+  <div class="row">
+    <div class="col-md-2"></div>    
+    <div class="col-md-4">
+      {{#each image2activities}}
+            {{label}}              
+            {{> quickRemoveButton collection=Collections.Images2Brainstorm _id=this._id class="btn btn-sm btn-danger"}}
+            <br>
+      {{/each}}         
+    </div>      
+    <div class="col-md-3"></div>        
+  </div>
+  
+  
+
+
+
+
+  {{#autoForm id="insertImages2person" type="insert" collection=Collections.Images2Brainstorm}}
+  <div class="row">
+    <div class="col-md-2">People</div>
+    
+    <div class="col-md-4">
+        <div class="form-group {{#if afFieldIsInvalid name='label'}}has-error{{/if}}">          
+          {{> afFieldInput name='label'}}
+          {{#if afFieldIsInvalid name='label'}}
+          <span class="help-block">{{{afFieldMessage name='label'}}}</span>
+          {{/if}}
+        </div>            
+    </div>      
+    <div class="col-md-3">
+        <div class="form-group">
+          <br>
+          <button type="submit" class="btn btn-primary">Add</button> (or press 'enter')
+          <!--<button type="reset" class="btn btn-default">Clear</button>-->
+        </div>
+      </div> 
+  </div>
+  {{/autoForm}}
+
+  <div class="row">
+    <div class="col-md-2"></div>    
+    <div class="col-md-4">
+      {{#each image2people}}
+            {{label}}              
+            {{> quickRemoveButton collection=Collections.Images2Brainstorm _id=this._id class="btn btn-sm btn-danger"}}
+            <br>
+      {{/each}}         
+    </div>      
+    <div class="col-md-3"></div>        
+  </div>  
+
+  
+
+
+
+
+
+
+  {{#autoForm id="insertImages2setting" type="insert" collection=Collections.Images2Brainstorm}}
+  <div class="row">
+    <div class="col-md-2">People</div>
+    
+    <div class="col-md-4">
+        <div class="form-group {{#if afFieldIsInvalid name='label'}}has-error{{/if}}">          
+          {{> afFieldInput name='label'}}
+          {{#if afFieldIsInvalid name='label'}}
+          <span class="help-block">{{{afFieldMessage name='label'}}}</span>
+          {{/if}}
+        </div>            
+    </div>      
+    <div class="col-md-3">
+        <div class="form-group">
+          <br>
+          <button type="submit" class="btn btn-primary">Add</button> (or press 'enter')
+          <!--<button type="reset" class="btn btn-default">Clear</button>-->
+        </div>
+      </div> 
+  </div>
+  {{/autoForm}}
+
+  <div class="row">
+    <div class="col-md-2"></div>    
+    <div class="col-md-4">
+      {{#each image2settings}}
+            {{label}}              
+            {{> quickRemoveButton collection=Collections.Images2Brainstorm _id=this._id class="btn btn-sm btn-danger"}}
+            <br>
+      {{/each}}         
+    </div>      
+    <div class="col-md-3"></div>        
+  </div>  
+
+
+
+</template>

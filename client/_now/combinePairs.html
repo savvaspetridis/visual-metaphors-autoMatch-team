@@ -1,0 +1,197 @@
+<template name="combinePairs">
+    {{> header1}} 
+    <div class="main" style="padding-top: 50px">    
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-12'>
+                    {{> insertCombinePairs}}
+                </div>
+            </div> 
+
+        </div>        
+    </div>
+</template>
+
+
+
+<template name="insertCombinePairs">    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="taskheaderCombine">
+                <button class='btn instructions'>Instructions</button>
+                Combine Images
+
+                <div style="float: right">
+                    <span style="font-size: medium">Found: <b>{{countPairs}} </b> </span>
+                    <button class="done btn btn-success"  data-template="combinePairs" data-concept="{{metaphorPair.concept_id}}"> Done </button>             
+                </div> 
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <select id="filterA_complexity" class="filterA">
+                        <option {{isSelectedFilterA "filterA_complexity" "(Whole + parts)"}}>(Whole + parts)</option>
+                        <option {{isSelectedFilterA "filterA_complexity" "Whole"}}>Whole</option>
+                         <option {{isSelectedFilterA "filterA_complexity" "Part"}}>Part</option>
+                    </select>
+
+                    <select id="filterA_shape" class="filterA">
+                        <option {{isSelectedFilterA "filterA_shape" "(All Shapes)"}}>(All Shapes)</option>
+                        <option {{isSelectedFilterA "filterA_shape" "Circle"}}>Circle</option>
+                         <option {{isSelectedFilterA "filterA_shape" "Rectangle"}}>Rectangle</option>
+                         <option {{isSelectedFilterA "filterA_shape" "Cylinder"}}>Cylinder</option>
+                    </select>
+
+                    <select id="filterA_dimensionality" class="filterA">
+                        <option {{isSelectedFilterA "filterA_dimensionality" "(flat + 3-D)"}}>(flat + 3-D)</option>
+                        <option {{isSelectedFilterA "filterA_dimensionality" "flat"}}>flat</option>
+                         <option {{isSelectedFilterA "filterA_dimensionality" "3-D"}}>3-D</option>
+                         
+                    </select>
+
+                    ({{count_images1}})
+                    <div class="banner" style="background-color: lightyellow">
+                        <!-- {{metaphorPair.concept1}} -->                 
+                    </div>
+
+                </div>           
+            </div>
+            <div class="row">
+                
+                <div class="col-md-12">
+                    <!-- <h3 class="comboTitle"> </h3> -->
+                    <div id="image1container">
+                        {{#each images1}}                 
+                        <div class= "imageContainer image1Container {{isSelected1 _id}}" >
+                            {{> displayCanvas}}
+                                            
+                        </div>               
+                        {{/each}} 
+                        <!-- These stupid brs are here just so I can scroll down to the last item and still have it align with the other column (mostly cosmetic for taking screen shots) -->
+                        <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br> 
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-8">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <select id="filterB_complexity" class="filterB">
+                        <option {{isSelectedFilterB "filterB_complexity" "(Whole + parts)"}}>(Whole + parts)</option>
+                        <option {{isSelectedFilterB "filterB_complexity" "Whole"}}>Whole</option>
+                         <option {{isSelectedFilterB "filterB_complexity" "Part"}}>Part</option>
+                    </select>
+
+                    <select id="filterB_shape" class="filterB">
+                        <option {{isSelectedFilterB "filterB_shape" "(All Shapes)"}}>(All Shapes)</option>
+                        <option {{isSelectedFilterB "filterB_shape" "Circle"}}>Circle</option>
+                         <option {{isSelectedFilterB "filterB_shape" "Rectangle"}}>Rectangle</option>
+                         <option {{isSelectedFilterB "filterB_shape" "Cylinder"}}>Cylinder</option>
+                    </select>
+
+                    <select id="filterB_dimensionality" class="filterB">
+                        <option {{isSelectedFilterB "filterB_dimensionality" "(flat + 3-D)"}}>(flat + 3-D)</option>
+                        <option {{isSelectedFilterB "filterB_dimensionality" "flat"}}>flat</option>
+                         <option {{isSelectedFilterB "filterB_dimensionality" "3-D"}}>3-D</option>
+                         
+                    </select>
+
+                    ({{count_images2}})
+
+                    <div class="banner" style="background-color: lightcyan">
+                        {{metaphorPair.concept2}}                 
+                    </div>
+                </div>           
+            </div> 
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="comboTitle"></h3>
+                    <div id="image2container">
+                        {{#each images2}} 
+                            <div class="row"> 
+                                <div class="col-md-6">               
+                                    <div class= "imageContainer image2Container {{isSelected2 _id}}" >
+                                        {{> displayCanvas2}}                                                    
+                                    </div> 
+                                </div>
+
+                                <div class="col-md-6">
+                                     <div id="pairsPreview">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                    Mix Canvas<br>
+                                                {{> mixCanvas}}
+                                            </div>
+
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>  
+                            
+                        {{/each}}  
+                        <!-- These stupid brs are here just so I can scroll down to the last item and still have it align with the other column (mostly cosmetic for taking screen shots) -->
+                        <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br>
+                         <br> 
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>   
+
+</template>
+
+
+<template name="displayCanvas"> 
+    <div class="image1label">{{label}}</div> 
+    <canvas id="canvas_{{_id}}" class="editingCanvas" height="400" width="300"></canvas>
+    
+</template>
+
+
+<template name="displayCanvas2">  
+     <div class="image2label">{{label}}</div>
+    <canvas id="canvas_2_{{_id}}" class="editingCanvas" height="400" width="300"></canvas>
+    
+
+</template>
+
+<template name="mixCanvas">
+    <div id="my_mix_canvas_container_{{_id}}" height="400" width="300">
+    </div>
+    <button class="saveMixCanvas" id="saveMixCanvas_{{_id}}"> Save </button>
+</template>
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+<template name="mixesFilter">
+  {{> header1}} 
+  <div class="main" style="padding-top: 50px">    
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          {{> insertMixesFilter}}
+        </div>
+      </div>       
+    </div>        
+  </div>
+</template>
+
+
+
+<template name="insertMixesFilter">
+    <br>
+    <div class="row">
+        <div class="col-md-9">
+            <button class='btn instructions'>Instructions</button>
+            <div class="taskheader">
+                
+            Matches for <span class="conceptName">{{metaphorPair.concept1}} + {{metaphorPair.concept2}} </span>
+                
+            </div>
+        </div>
+        <div class="col-md-3">
+                    
+            
+            {{#if isWarmup}}
+Progress: <b>{{countImagesHaveIconic}} / {{countImages}} </b> 
+  <button class="done btn btn-success"  data-template="images1filter" data-concept="{{metaphorPair.concept_id}}"> Done </button>                   
+            {{else}}
+Progress: <b>{{countImagesHaveIconic}} / {{countImages}} </b> 
+  <button class="next btn btn-success"  data-template="images1filter" data-concept="{{metaphorPair.concept_id}}"> Next </button> 
+            {{/if}}           
+            
+            
+            
+        </div>        
+    </div>    
+    
+    <!--
+
+{{> addImage}}
+  
+  -->
+ 
+ 
+
+    <div style="width: 800px">
+
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <td style="width: 200px">Label</td>
+            <td style="width: 360px">Image</td>
+            <td style="width: 150px">Properties</td>
+        
+          </tr>
+        </thead>
+        <tbody>
+          {{#each mixes}}
+            {{> mixAnnotation}}            
+          {{/each}}
+        </tbody>
+      </table>
+</div>
+</template>
+
+<template name="mixAnnotation">
+  <tr>
+    <td>{{label}}  </td>
+      
+    <td>
+        <canvas id="canvas_{{_id}}" class="editingCanvas" height="400" width="300"></canvas>
+
+        <br>
+        <button class="saveCanvas" id="saveCanvas_{{_id}}"> Save </button>
+      </td>
+
+
+
+      
+    <td style="width: 150px" >
+     <!--
+      {{#autoForm id=makeUniqueID type="update" collection=Collections.Images1 doc=this autosave=true}}
+        <div class="{{todo}}">
+        {{> afFormGroup name="iconic" label=true options="allowed"}}
+        {{> afFormGroup name="whole" label=true options="allowed"}}
+        {{> afFormGroup name="shape" label=true options="allowed"}}
+            </div>
+      {{/autoForm}}
+      -->
+
+      {{> quickRemoveButton collection=Collections.MixCanvases _id=this._id class="btn btn-sm btn-danger"}}
+
+    </td>
+  </tr>
+</template>

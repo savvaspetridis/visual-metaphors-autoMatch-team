@@ -1,0 +1,151 @@
+<template name="images1find">
+    {{> header1}} 
+    <div class="main" style="padding-top: 50px">    
+        <div class='container'>
+      <div class='row'>
+        {{> showList1}}
+        <div class='col-md-8'>
+          {{> insertImages1}}
+        </div>
+      </div> 
+
+        </div>        
+    </div>
+</template>
+
+
+
+<template name="showList1">
+  <div class='col-md-3'>
+    <div class="brainstormList">
+      Objects:
+      <ul>
+         {{#each brainstorm_objects.objects}}
+        <li>{{this}}</li>
+
+        {{/each}}
+      </ul>
+      Activities:
+      <ul>
+         {{#each brainstorm_objects.activities}}
+        <li>{{this}}</li>
+
+        {{/each}}
+      </ul>
+      People:
+      <ul>
+         {{#each brainstorm_objects.people}}
+        <li>{{this}}</li>
+
+        {{/each}}
+      </ul>
+      Settings:
+      <ul>
+         {{#each brainstorm_objects.settings}}
+        <li>{{this}}</li>
+
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
+
+
+
+<template name="addImage">
+    {{#autoForm id="insertImages1" type="insert" collection=Collections.Images1}}  
+    <div class="row">   
+
+        <div class="col-md-3">
+            <div class="form-group {{#if afFieldIsInvalid name='label'}}has-error{{/if}}">
+                <label class="control-label">{{afFieldLabelText name='label'}}</label>
+                {{> afFieldInput name='label'}}
+                {{#if afFieldIsInvalid name='label'}}
+                <span class="help-block">{{{afFieldMessage name='label'}}}</span>
+                {{/if}}
+            </div>   
+        </div>
+
+
+
+        <div class="col-md-4">
+            <div class="form-group {{#if afFieldIsInvalid name='url'}}has-error{{/if}}">
+                <label class="control-label">{{afFieldLabelText name='url'}}</label>
+                {{> afFieldInput name='url'}}
+                {{#if afFieldIsInvalid name='url'}}
+                <span class="help-block">{{afFieldMessage name='url'}}</span>
+                {{/if}}      
+            </div>           
+        </div>      
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <br>
+                <button type="submit" class="btn btn-primary">Add Image</button>
+                <button type="reset" class="btn btn-default">Reset Form</button>
+            </div>
+        </div>  
+    </div>    
+    {{/autoForm}}  
+</template>
+
+
+<template name="insertImages1">
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <!--<button class='btn instructions'>Instructions</button>-->
+            <div class="taskheader">
+                
+                Find Objects for: <span class="conceptName">{{concept}}</span>
+                
+                
+            </div>
+            Remember to focus your search on objects that are:
+            <ul>
+              <li><b>simple</b> and iconic</li>
+              <li>a <b>single main shape</b></li>
+              <li>objects, <b>not people</b> or animals</li>
+              <li>objects and <b>not scenes</b> with multiple objects</li>
+                 
+            </ul>
+            Use <a href="https://images.google.com" target="_blank">google image search</a>. Try to find <b>10</b> images.
+            <br><br>
+        </div>
+        <div class="col-md-4">
+            Progress: <b>{{countImages}} / 10 </b>  <button class="next btn btn-success"  data-template="images2find" data-concept2="{{concept}}"> Next </button> 
+            <!--
+            {{#if isWarmup}}
+Progress: <b>{{countImages}} / 10 </b> 
+  <button class="done btn btn-success"  data-template="images2find" data-concept="{{metaphorPair.concept_id}}"> Done </button>                  
+            {{else}}
+Progress: <b>{{countImages}} / 10 </b> 
+  <button class="next btn btn-success"  data-template="images2find" data-concept="{{metaphorPair.concept_id}}"> Next </button> 
+            {{/if}} 
+            -->
+                    
+            
+        </div>        
+    </div> 
+
+    
+    {{> addImage}}
+
+
+    {{#each images1}}
+    <div class="rowspacer">
+        <div class="row">
+            <div class="col-md-2">
+                {{label}}
+            </div>
+            <div class="col-md-4">
+                <div style="max-height: 300px;" ><img src="{{url}}" style="width: 100%"/></div>
+            </div>
+            <div class="col-md-3">
+                {{> quickRemoveButton collection=Collections.Images1 _id=this._id class="btn btn-sm btn-danger"}}
+            </div>
+        </div>
+    </div>
+    {{/each}}  
+
+</template>

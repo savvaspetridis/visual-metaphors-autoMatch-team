@@ -1,0 +1,143 @@
+<template name="images1filter">
+  {{> header1}} 
+  <div class="main" style="padding-top: 50px">    
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          {{> insertImages1filter_header}}
+          {{> addImage}}
+          {{> insertImages1filter}}
+        </div>
+      </div>       
+    </div>        
+  </div>
+</template>
+
+<template name="images1filterOnly">
+  {{> header}} <!--{{> header1}} -->
+  <div class="main" style="padding-top: 50px">    
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          {{> insertImages1filter_headerOnly}}
+
+          {{> insertImages1filter}}
+        </div>
+      </div>       
+    </div>        
+  </div>
+</template>
+
+
+
+
+<template name="insertImages1filter_header">
+    <br>
+    <div class="row">
+        <div class="col-md-9">
+            <button class='btn instructions'>Instructions</button>
+            <div class="taskheader">
+                
+            Annotate Images for <span class="conceptName">{{concept}}</span>
+                
+            </div>
+        </div>
+        <div class="col-md-3">  
+        <!--                            
+            {{#if isWarmup}}
+Progress: <b>{{countImagesHaveIconic}} / {{countImages}} </b> 
+  <button class="done btn btn-success"  data-template="images1filter" data-concept="{{metaphorPair.concept_id}}"> Done </button>                   
+            {{else}}
+Progress: <b>{{countImagesHaveIconic}} / {{countImages}} </b> 
+  <button class="next btn btn-success"  data-template="images1filter" data-concept="{{metaphorPair.concept_id}}"> Next </button> 
+            {{/if}}  
+            -->                                           
+        </div>        
+    </div>    
+</template>
+
+
+
+<template name="insertImages1filter_headerOnly">
+    <br>
+    <div class="row">
+        <div class="col-md-9">            
+            <div class="taskheader">                
+            Draw and Classify Shape on objects for <span class="conceptName">{{concept}}</span>                
+            </div>
+        </div>
+        <div class="col-md-3">                              
+            <button class='btn instructions'>Instructions</button>                                            
+        </div>        
+    </div>    
+</template>
+
+
+
+
+
+<template name="insertImages1filter">
+    <div style="width: 800px">
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <td style="width: 200px">Label</td>
+            <td style="width: 360px">Image</td>
+            <td style="width: 150px">Properties</td>        
+          </tr>
+        </thead>
+        <tbody>
+          {{#each images1}}
+            {{> imageAnnotation}}            
+          {{/each}}
+        </tbody>
+      </table>
+</div>
+</template>
+
+<template name="imageAnnotation">
+  <tr>
+    <td>{{label}}  </td>
+      
+    <td>
+      <canvas id="canvas_{{_id}}" class="editingCanvas" height="400" width="300"></canvas>
+      <!--
+      <br>
+      <button class="saveCanvas" id="saveCanvas_{{_id}}"> Save </button>
+      -->
+    </td>
+
+      
+    <td style="width: 300px; position: relative;" >
+      Shape: {{{getShapeName shape}}}<br>
+      Coverage: {{{getCoverageName complexity}}}<br>
+
+      <button class="btn btn-primary edit" id="edit_{{_id}}" data-id="{{_id}}" style="display:none;"> Edit</button>
+
+      <div class="updateForm" id="update_{{_id}}" data-id="{{_id}}" >
+        {{#autoForm id=makeUniqueID type="update" collection=Collections.Images1 doc=this }}
+          <div class="{{todo}}">
+            <!--
+            {{> afFormGroup name="metaphorPair_id" label=true }}
+            concept: {{this.concept}}<br>
+            {{> afFormGroup name="concept" label=true }}
+            -->
+            {{> afFormGroup name="shape" label=true options=shapeOptions}}        
+            {{> afFormGroup name="complexity" label=true options=coverageOptions}}
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary submitedit" data-id="{{_id}}" >Submit</button>          
+            </div>
+
+          </div>
+        {{/autoForm}}
+      </div> 
+
+      <!--
+      <div style="position: absolute; bottom: 0;">
+        {{#quickRemoveButton collection=Collections.Images1 _id=this._id class="btn btn-sm"}}Delete image{{/quickRemoveButton}}      
+      </div>
+      -->
+    </td>
+  </tr>
+</template>

@@ -1,0 +1,130 @@
+<template name="instructionsDrawShapes">
+<div>
+{{> drawShapesIntro}}
+{{> drawShapeExercises}}
+</div>
+</template>
+
+<template name="drawShapesIntro">
+<h1>Drawing Shapes </h1>
+<p>
+So far, you have seen many examples of objects with shapes drawn on them. Now it's your turn to draw the shapes.
+</p>
+<p>
+In addition to <b>drawing on the shape</b>, 
+<ul>
+	<li><b>classify the shape</b> (sphere, circle, rectangle, box, cylinder, other)</li>
+	<li><b>label the coverage of the shape</b> (all, part, other)</li>
+</ul>
+</p>
+<p>
+Sometimes there are multiple correct answers. We give you one sample answer. Hopefully at least some of your answers will be close to the sample answer.
+</p>
+
+</template>
+
+
+<template name="drawShapeExercises">
+	<h2>Exercise: Draw Shapes </h2>
+
+	<p>
+		For the following images, <b>pick</b> one of the two shapes near the image, <b>drag</b> it over the object, and <b>resize</b> it to fit the object to a close approximation.
+
+	</p>
+	<p>
+
+		Pick the <span style="color: rgba(255,0,0,.5); font-weight: bold">Red Circle</span> for drawing:
+		<ul>
+			<li>Sphere (deep)</li>
+			<li>Circle (flat)</li>
+		</ul>
+		
+		Pick the <span style="color: rgba(0,255,0,.9); font-weight: bold">green rectangle </span> for drawing
+		<ul>
+			<li>Box (deep)</li>
+			<li>Rectangle (flat)</li>
+			<li>Cylinder (deep)</li>
+		</ul>
+	</p>
+	<p>
+<b>Note:</b> If the object does not have one of the 5 target shapes in it, select "other" for shape, and you don't have to do anything else.
+	</p>
+
+	{{#each exercises}}
+	    {{> drawShapeExercise}}
+	{{/each}}
+    <div class="centeredDiv">
+        <button class="done btn btn-success"  data-template="instructionsIntro" data-concept="none"> Next </button> 
+    </div>    
+    <br>
+    <br>
+    <br>
+</template>
+
+<template name="drawShapeExercise">
+    <div class="row">
+    	<div class="col-md-4">
+    		<canvas id="canvas_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
+    	</div>
+    
+    	<div class="col-md-6">
+		Shape:
+        <select id="select-shape-{{url}}" class="select_shape">
+                <option value="select" data-url="{{url}}">(select)</option>
+                <option value="box" data-url="{{url}}">Box (with depth)</option>
+                <option value="rectangle" data-url="{{url}}">Rectangle (flat)</option>
+                <option value="sphere" data-url="{{url}}">Sphere (with depth)</option>
+                <option value="circle" data-url="{{url}}">Circle (flat)</option>
+                <option value="cylinder" data-url="{{url}}">Cylinder (with depth)</option>
+                <option value="other" data-url="{{url}}">other</option>
+            </select>
+        <br>
+        <br>
+
+
+        Shape covers:
+        <select id="select-complexity-{{url}}" class="select_complexity">
+            <option value="select" data-url="{{url}}">(select)</option>
+            <option value="whole" data-url="{{url}}">All of the object</option>
+            <option value="part" data-url="{{url}}">Part of the object</option>
+            <!-- <option value="other" data-url="{{url}}">other</option> -->
+        </select>
+
+        <button class="submitExercise btn btn-primary" data-url="{{url}}" data-shape="{{shape}}" data-complexity="{{complexity}}">Submit</button>
+            
+
+
+        <div class="answerCorrectShape" style="display:none" >          
+            Shape: <b>Correct!</b><br>
+            <span class="correctFeedback"></span>
+        </div> 
+        <div class="answerInCorrectShape" style="display:none" >          
+            Shape: <b>We disagree</b><br>
+            <span class="incorrectFeedback"></span>
+        </div> 
+        <br>
+
+
+        <div class="answerCorrectComplexity" style="display:none" >          
+            Coverage: <b>Correct!</b><br>
+            <span class="correctFeedback"></span>
+        </div> 
+        <div class="answerInCorrectComplexity" style="display:none" >          
+            Coverage: <b>We disagree</b><br>
+            <span class="incorrectFeedback"></span>
+        </div> 
+        <br>
+        <div class="answerDrawing" style="display:none">
+        	Our shape drawing:
+	        <div style="max-height:200px; max-width: 200px; ">
+	        	<img style="max-height:200px; max-width: 200px; border: 1px solid black" src="{{answerURL}}">        
+	        </div>
+        </div>
+
+        </div> 
+    </div>
+    <br>
+    <br>
+    <br>
+
+</template>

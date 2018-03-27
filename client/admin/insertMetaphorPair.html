@@ -1,0 +1,58 @@
+<template name="insertMetaphorPair">
+
+  {{#autoForm id="insertMetaphorPair" type="insert" collection=Collections.MetaphorPairs}}    
+    <div class="row">   
+       
+      <div class="col-md-4">
+        <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
+          <label class="control-label">{{afFieldLabelText name='concept1'}}</label>
+          {{> afFieldInput name='concept1'}}
+          {{#if afFieldIsInvalid name='concept1'}}
+          <span class="help-block">{{{afFieldMessage name='concept1'}}}</span>
+          {{/if}}
+        </div>    
+      </div>
+      
+      <div class="col-md-4">
+        <div class="form-group {{#if afFieldIsInvalid name='lastName'}}has-error{{/if}}">
+          <label class="control-label">{{afFieldLabelText name='concept2'}}</label>
+          {{> afFieldInput name='concept2'}}
+          {{#if afFieldIsInvalid name='concept2'}}
+          <span class="help-block">{{{afFieldMessage name='concept2'}}}</span>
+          {{/if}}
+        </div>            
+      </div>      
+    </div>
+    
+    
+    <div class="row"> 
+      <div class="col-md-5"></div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Add Pair</button>
+          <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+      </div>  
+    </div>    
+  {{/autoForm}}
+
+
+
+
+
+
+  <h2>Metaphor Pairs</h2>
+
+
+  {{#each metaphorPairs}}
+  <div class="row">
+    <div class="col-md-3"> 
+      <button class="btn goToMetaphorPair">{{concept1}} + {{concept2}} </button>       
+    </div>
+    <div class="col-md-2">
+      {{> quickRemoveButton collection=Collections.MetaphorPairs _id=this._id class="btn btn-sm btn-danger"}}
+    </div>
+  </div>
+  {{/each}}
+
+</template>

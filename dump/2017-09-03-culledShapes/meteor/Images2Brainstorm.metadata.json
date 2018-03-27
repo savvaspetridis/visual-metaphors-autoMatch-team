@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"meteor.Images2Brainstorm"},{"v":1,"key":{"metaphorPair_id":1},"name":"c2_metaphorPair_id","ns":"meteor.Images2Brainstorm","background":true,"sparse":false}]}

@@ -1,0 +1,366 @@
+<template name="instructionsImages2">
+<h2>Finding Images</h2>
+
+<p>
+To make a blend of two concepts (such as "Starbucks" and "summer") we need <b>multiple images</b> of both "Starbucks" and "winter" to increase our chance of finding a shape match.
+</p>
+
+<p>
+To make things simpler, we only work on finding images for one concept at a time. We trust that if we find enough images, there will be a match. 
+</p>
+
+<p>
+To help find multiple images, we have asked other people to brainstorm associations with the concept. For example, here are <b>objects, people, activities, and settings</b> we brainstormed for "summer":
+</p>
+
+<div style="background-color: lavender; padding: 3px; width: 300px">
+<h3 style="text-align: center">Summer</h3>
+<b>Objects</b>
+  <ul>
+  <li>beach ball</li>
+  <li>sunglasses</li>
+  <li>bbq grill</li>
+  </ul>
+
+<b>Activities</b>
+  <ul>
+  <li>swimming</li>
+  <li>playing tennis</li>
+  </ul>
+
+<b>People</b>
+<ul>
+<li>baseball manage: coaching players</li>
+<li>lifeguard: watching swimmers</li>
+</ul>
+
+<b>Settings</b>
+<ul>
+<li>beach</li>
+<li>bbq party</li>
+</ul>
+
+</div>
+<br>
+<p>
+Notice that <b>not all of these associations are objects</b>. But some of them can help you to think of objects. For example,
+<br>
+<br>
+
+
+<div class="row">
+  <div class="col-md-3">
+    <b>Association</b>
+  </div>
+  <div class="col-md-3">
+    
+     <b>Object</b>
+    
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-3">
+    <div style="background-color: lavender; padding: 3px; width: 250px">
+      <b>People</b><br>
+     <ul><li>lifeguard: watching swimmers</li></ul> 
+    </div>
+  </div>
+  <div class="col-md-3">
+    
+      Lifeguard tower<br>
+      <img src="{{baseURL}}images2/associationsToObjects/lifeguardtower.jpg" class="iconicImg">
+    
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-3">
+  <div style="background-color: lavender; padding: 3px; width: 250px">
+      <b>Activity</b><br>
+     <ul><li>swimming</li></ul> 
+    </div>
+    
+    
+  </div>
+  <div class="col-md-3">
+    
+      lifesaver<br>
+      <img src="{{baseURL}}images2/associationsToObjects/life-saver.png" class="iconicImg">
+    
+  </div>
+</div>
+</p>
+
+
+
+<p>
+You already have a sense of the type of images make good blends. To further guide your understanding here is a quiz. We will state a trait we want in images, and you pick which image exhibits the trait better.
+</p>
+
+
+<h3>Pick plain, iconic objects not fancy ones</h3>
+<div class="row">
+  <div class="col-md-3">
+    <div class="option" data-num="d" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/starbuckscoffee.jpeg" class="aORbImageTile">
+    </div>
+  </div>
+   <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="d" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/starbucks-fancy.JPG" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="d_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="d_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/starbuckscoffee.jpeg" class="aORbImageTile">   
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-3">
+    <div class="option" data-num="dd" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/beachball-fancy.jpg" class="aORbImageTile">
+    </div>
+  </div>
+  <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="dd" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/beachball.jpg" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="dd_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="dd_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/beachball.jpg" class="aORbImageTile">    
+    </div>
+  </div>  
+</div>
+<br>
+<br>
+<br>
+
+<h3>Pick objects with a single main shape</h3>
+<div class="row">
+  <div class="col-md-3">
+    <div class="option" data-num="c" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/snowman-head.png" class="aORbImageTile">
+    </div>
+  </div>
+   <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="c" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/snowman.jpg" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="c_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="c_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/snowman-head.png" class="aORbImageTile">    
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<div class="row">
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="option" data-num="cc" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/boquet.jpg" class="aORbImageTile">
+    </div>
+  </div>
+  <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="cc" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/daisy.jpg" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="cc_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="cc_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/daisy.jpg" class="aORbImageTile">    
+    </div>
+  </div>  
+</div>
+<br>
+<br>
+<br>
+</div>
+<br>
+<br>
+<br>
+
+
+
+<h3>Pick objects <b>not</b> people or animals</h3>
+<div class="row">
+  <div class="col-md-3">
+    <div class="option" data-num="a" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/lifeguard.jpg" class="aORbImageTile">
+    </div>
+  </div>
+   <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="a" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/lifeguardtower.jpg" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="a_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="a_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/lifeguardtower.jpg" class="aORbImageTile">    
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+
+
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="option" data-num="bb" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/tennisball.jpg" class="aORbImageTile">
+    </div>
+  </div>
+  <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="bb" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/tennis.jpg" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="bb_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="bb_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/tennisball.jpg" class="aORbImageTile">    
+    </div>
+  </div>  
+</div>
+<br>
+<br>
+<br>
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="option" data-num="bbb" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/dog2.jpg" class="aORbImageTile">
+    </div>
+  </div>
+  <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="bbb" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/dogbone.jpg" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="bbb_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="bbb_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/dogbone.jpg" class="aORbImageTile">    
+    </div>
+  </div>  
+</div>
+<br>
+<br>
+<br>
+
+
+
+
+<h3>Pick objects not scenes</h3>
+<div class="row">
+  <div class="col-md-3">
+    <div class="option" data-num="e" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/tree-forrest.jpeg" class="aORbImageTile">
+    </div>
+  </div>
+   <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="e" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/tree.jpeg" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="e_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="e_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/tree.jpeg" class="aORbImageTile">    
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+
+<div class="row" >
+  <div class="col-md-3">
+    <div class="option" data-num="b" data-correct="incorrect">
+      <img src="{{baseURL}}images2/associationsToObjects/beach.jpg" class="aORbImageTile">
+    </div>
+  </div>
+  <div class="col-md-1"><div class="or"><br><br><br>OR</div></div>
+  <div class="col-md-3">
+    <div class="option correct" data-num="b" data-correct="correct">
+      <img src="{{baseURL}}images2/associationsToObjects/surfboard.jpg" class="aORbImageTile">  
+    </div>  
+  </div>
+  <div class="col-md-1"></div>
+  <div class="col-md-3">
+    <div class="feedback" style="display: none" id="b_feedback_incorrect">
+      <b>We disagree</b>
+    </div>
+    <div class="feedback" style="display: none" id="b_feedback_correct">
+      <b>Correct!</b><br>
+      <img src="{{baseURL}}images2/associationsToObjects/surfboard.jpg" class="aORbImageTile">    
+    </div>
+  </div>  
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="centeredDiv">
+<button class="done btn btn-success"  data-template="instructionsImages2" data-concept="none"> Done </button> 
+</div>
+</template>

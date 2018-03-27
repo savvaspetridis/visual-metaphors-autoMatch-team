@@ -1,0 +1,33 @@
+.goalTitle{
+  font-weight: bold;
+  font-size:medium;
+}
+
+.iconicImg{
+  max-width: 200px;
+  max-height: 150px;
+}
+
+.goodExample{
+  color:green;
+}
+
+.badExample{
+  color:red;
+}
+
+.imageAndSentenceTile{
+  width: 200px;
+  float: left;
+  height: 200px;
+  
+}
+
+.coloredSection{
+  background-color: lightgrey;
+  padding: 10px;
+}
+
+.centeredDiv{
+  text-align: center;
+}

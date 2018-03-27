@@ -1,0 +1,68 @@
+<template name="matrix">
+  {{> header1}} 
+  <div class="main" style="padding-top: 50px">    
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          {{> recombinationMatrix}}
+        </div>
+      </div> 
+      
+    </div>        
+  </div>
+</template>
+
+<template name="recombinationMatrix">
+<!--
+  {{#each image in images1}}
+    <img src="{{image.url}}"/> <br>
+  {{/each}}
+  <br>
+  <br>
+  {{#each image in images2}}
+    <img src="{{image.url}}"/> <br>
+  {{/each}}
+--> 
+ <table>
+   <tr>
+     <td style="width: 200px"></td>
+      {{#each image in images2}}
+        <td style="width: 200px; min-width: 150px">
+          <img style="width: 100%" src="{{image.url}}"/>
+        </td>
+      {{/each}}   
+   </tr>
+  {{#each image in images1}}
+    <tr>
+      <td style="width: 200px; min-width: 150px">
+        <img style="width: 100%" src="{{image.url}}"/>
+        {{image.label}}
+      </td>  
+      {{#each image_inner in images2}}
+        <td style="width: 200px; min-width: 150px">
+          <div style="width:200px">
+          {{image_inner._id}}<br>        
+          {{image._id}}<br>
+          
+          <select class="pair" data-images1id="{{image._id}}" data-images2id="{{image_inner._id}}">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="maybe">Maybe</option>
+            <option value="none" selected="selected"></option>
+          </select>
+          
+          <!--
+          {{#autoForm id=makeUniqueID type="update" collection="Collections.MatchEvaluation" }}
+            {{> afFormGroup name="match_evaluation" options="allowed" noselect=true}} 
+            <br>
+            
+          {{/autoForm}}         
+          -->
+          
+          </div>
+        </td>
+      {{/each}}    
+    </tr>
+  {{/each}} 
+ </table>
+</template>
