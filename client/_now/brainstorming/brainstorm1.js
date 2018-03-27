@@ -52,6 +52,94 @@ Template.listBrainstorm1_object.helpers({
 
 
 /////////////////////////
+// ACTIVITY
+/////////////////////////
+
+AutoForm.hooks({
+  insertBrainstorm1_activity: {
+    before: {
+      insert: function(doc) {
+        doc.timestamp = new Date().getTime();
+        var concept = Router.current().params.concept1
+        doc.concept = concept 
+        doc.brainstorm_type = "activity" 
+        this.result(doc);
+      }
+    },
+  },
+});
+
+
+Template.listBrainstorm1_activity.helpers({
+  count_brainstorm_activity: function(){
+    var concept = Router.current().params.concept1
+    return Brainstorm1.find({
+        //metaphorPair_id: metaphorPair_id, 
+        //createdBy: Meteor.userId()
+        concept:concept,
+        brainstorm_type: "activity",
+    }).count();
+    
+  },
+  
+  brainstorm_activity: function () {
+    var concept = Router.current().params.concept1
+    return Brainstorm1.find({
+        //metaphorPair_id: metaphorPair_id, 
+        //createdBy: Meteor.userId()
+        concept:concept,
+        brainstorm_type: "activity",
+    }, {sort: {timestamp: 1}});
+  },
+
+})
+
+
+/////////////////////////
+// PERSON
+/////////////////////////
+
+AutoForm.hooks({
+  insertBrainstorm1_person: {
+    before: {
+      insert: function(doc) {
+        doc.timestamp = new Date().getTime();
+        var concept = Router.current().params.concept1
+        doc.concept = concept 
+        doc.brainstorm_type = "person" 
+        this.result(doc);
+      }
+    },
+  },
+});
+
+
+Template.listBrainstorm1_person.helpers({
+  count_brainstorm_person: function(){
+    var concept = Router.current().params.concept1
+    return Brainstorm1.find({
+        //metaphorPair_id: metaphorPair_id, 
+        //createdBy: Meteor.userId()
+        concept:concept,
+        brainstorm_type: "person",
+    }).count();
+    
+  },
+  
+  brainstorm_person: function () {
+    var concept = Router.current().params.concept1
+    return Brainstorm1.find({
+        //metaphorPair_id: metaphorPair_id, 
+        //createdBy: Meteor.userId()
+        concept:concept,
+        brainstorm_type: "person",
+    }, {sort: {timestamp: 1}});
+  },
+
+})
+
+
+/////////////////////////
 // Setting
 /////////////////////////
 

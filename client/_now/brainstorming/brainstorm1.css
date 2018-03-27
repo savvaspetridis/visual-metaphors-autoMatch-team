@@ -1,3 +1,11 @@
+/*
 .del_brainstorm{
 	height: 10px;
+}
+*/
+
+.brainstorm_delete{
+	color: white;
+	/* background-color: #d9534f; */
+	background-color: grey;
 }

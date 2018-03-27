@@ -6,15 +6,26 @@
         <div class='col-md-12'>
           
           
-          {{> brainstorm1_header}}
+            {{> brainstorm1_header}}
 
-          {{> listBrainstorm1_object}}
-          {{> addBrainstorm1_object}}
+            {{> listBrainstorm1_object}}
+            {{> addBrainstorm1_object}}
 
-          {{> listBrainstorm1_setting}}
-          {{> addBrainstorm1_setting}}
+            
 
-          
+            {{> listBrainstorm1_activity}}
+            {{> addBrainstorm1_activity}}
+
+
+            {{> listBrainstorm1_person}}
+            {{> addBrainstorm1_person}}
+
+            
+
+
+            {{> listBrainstorm1_setting}}
+            {{> addBrainstorm1_setting}}
+         
 
         </div>
       </div>       
@@ -28,7 +39,7 @@
     <br>
     <div class="row">
         <div class="col-md-9">
-            <button class='btn instructions'>Instructions</button>
+            <!--<button class='btn instructions'>Instructions</button>-->
             <div class="taskheader">                
               Brainstorm Associations for <span class="conceptName">{{concept}}</span>              
             </div>
@@ -42,20 +53,25 @@
 <!-- OBJECT -->
 <template name="listBrainstorm1_object">
   <div class="row">   
-    <div class="col-md-3">
-        Objects:
+    <div class="col-md-12">
+        <b>Objects: ({{count_brainstorm_object}})</b>
 
        {{#each brainstorm_object}}
-        <div class="rowspacer">
+        <div class="">
             <div class="row">
                 <div class="col-md-2">
                     {{idea}}
                 </div>
+                <!--
                 <div class="col-md-4">
                     <div style="max-height: 300px;" ><img src="{{url}}" style="width: 100%"/></div>
                 </div>
-                <div class="col-md-3">
+                -->
+                <div class="col-md-1">
+                    {{#quickRemoveButton collection="Brainstorm1" _id=this._id class="brainstorm_delete"}}x{{/quickRemoveButton}}
+                    <!--
                     {{> quickRemoveButton collection=Collections.Brainstorm1 _id=this._id class="btn btn-sm btn-danger del_brainstorm"}}
+                -->
                 </div>
             </div>
         </div>
@@ -67,11 +83,11 @@
 
 <template name="addBrainstorm1_object">  
     {{#autoForm id="insertBrainstorm1_object" type="insert" collection=Collections.Brainstorm1}}  
-    <div class="row">   
-        <div class="col-md-4">
+    <div class="row rowspacer">   
+        <div class="col-md-2">
             <div class="form-group {{#if afFieldIsInvalid name='idea'}}has-error{{/if}}">
                 <!--<label class="control-label">{{afFieldLabelText name='idea'}}</label>-->
-                {{> afFieldInput name='idea'}}
+                {{> afFieldInput name='idea' }}
 
                 {{#if afFieldIsInvalid name='idea'}}
                 <span class="help-block">{{afFieldMessage name='idea'}}</span>
@@ -79,34 +95,165 @@
             </div>           
         </div>      
 
-        <div class="col-md-4">
+        <div class="col-md-1">
             <div class="form-group">
-                <br>
-                <button type="submit" class="btn btn-primary">Add Image</button>
-                <button type="reset" class="btn btn-default">Reset Form</button>
+                
+                <button type="submit" class="btn btn-primary">Add</button>
+                <!--<button type="reset" class="btn btn-default">Reset Form</button>-->
             </div>
         </div>  
     </div>    
     {{/autoForm}}  
 </template>
 
-<!-- SETTING -->
-<template name="listBrainstorm1_setting">
-  <div class="row">   
-    <div class="col-md-3">
-        Settings:
 
-       {{#each brainstorm_setting}}
-        <div class="rowspacer">
+
+
+
+
+
+<!-- ACTIVITY -->
+<template name="listBrainstorm1_activity">
+  <div class="row">   
+    <div class="col-md-12">
+        <b>Activities: ({{count_brainstorm_activity}})</b>
+
+       {{#each brainstorm_activity}}
+        <div class="">
             <div class="row">
                 <div class="col-md-2">
                     {{idea}}
                 </div>
+                <!--
                 <div class="col-md-4">
                     <div style="max-height: 300px;" ><img src="{{url}}" style="width: 100%"/></div>
                 </div>
-                <div class="col-md-3">
+                -->
+                <div class="col-md-1">
+                    {{#quickRemoveButton collection="Brainstorm1" _id=this._id class="brainstorm_delete"}}x{{/quickRemoveButton}}
+                    <!--
                     {{> quickRemoveButton collection=Collections.Brainstorm1 _id=this._id class="btn btn-sm btn-danger del_brainstorm"}}
+                -->
+                </div>
+            </div>
+        </div>
+        {{/each}} 
+    </div>
+  </div>
+</template>
+
+
+<template name="addBrainstorm1_activity">  
+    {{#autoForm id="insertBrainstorm1_activity" type="insert" collection=Collections.Brainstorm1}}  
+    <div class="row rowspacer">   
+        <div class="col-md-2">
+            <div class="form-group {{#if afFieldIsInvalid name='idea'}}has-error{{/if}}">
+                <!--<label class="control-label">{{afFieldLabelText name='idea'}}</label>-->
+                {{> afFieldInput name='idea' }}
+
+                {{#if afFieldIsInvalid name='idea'}}
+                <span class="help-block">{{afFieldMessage name='idea'}}</span>
+                {{/if}}      
+            </div>           
+        </div>      
+
+        <div class="col-md-1">
+            <div class="form-group">
+                
+                <button type="submit" class="btn btn-primary">Add</button>
+                <!--<button type="reset" class="btn btn-default">Reset Form</button>-->
+            </div>
+        </div>  
+    </div>    
+    {{/autoForm}}  
+</template>
+
+
+
+
+
+<!-- PEOPLE -->
+<template name="listBrainstorm1_person">
+  <div class="row">   
+    <div class="col-md-12">
+        <b>People: ({{count_brainstorm_person}})</b>
+
+       {{#each brainstorm_person}}
+        <div class="">
+            <div class="row">
+                <div class="col-md-2">
+                    {{idea}}
+                </div>
+                <!--
+                <div class="col-md-4">
+                    <div style="max-height: 300px;" ><img src="{{url}}" style="width: 100%"/></div>
+                </div>
+                -->
+                <div class="col-md-1">
+                    {{#quickRemoveButton collection="Brainstorm1" _id=this._id class="brainstorm_delete"}}x{{/quickRemoveButton}}
+                    <!--
+                    {{> quickRemoveButton collection=Collections.Brainstorm1 _id=this._id class="btn btn-sm btn-danger del_brainstorm"}}
+                -->
+                </div>
+            </div>
+        </div>
+        {{/each}} 
+    </div>
+  </div>
+</template>
+
+
+<template name="addBrainstorm1_person">  
+    {{#autoForm id="insertBrainstorm1_person" type="insert" collection=Collections.Brainstorm1}}  
+    <div class="row rowspacer">   
+        <div class="col-md-2">
+            <div class="form-group {{#if afFieldIsInvalid name='idea'}}has-error{{/if}}">
+                <!--<label class="control-label">{{afFieldLabelText name='idea'}}</label>-->
+                {{> afFieldInput name='idea' }}
+
+                {{#if afFieldIsInvalid name='idea'}}
+                <span class="help-block">{{afFieldMessage name='idea'}}</span>
+                {{/if}}      
+            </div>           
+        </div>      
+
+        <div class="col-md-1">
+            <div class="form-group">
+                
+                <button type="submit" class="btn btn-primary">Add</button>
+                <!--<button type="reset" class="btn btn-default">Reset Form</button>-->
+            </div>
+        </div>  
+    </div>    
+    {{/autoForm}}  
+</template>
+
+
+
+
+
+<!-- SETTING -->
+<template name="listBrainstorm1_setting">
+  <div class="row">   
+    <div class="col-md-12">
+        <b>Settings: ({{count_brainstorm_setting}})</b>
+
+       {{#each brainstorm_setting}}
+        <div class="">
+            <div class="row">
+                <div class="col-md-2">
+                    {{idea}}
+                </div>
+                <!--
+                <div class="col-md-4">
+                    <div style="max-height: 300px;" ><img src="{{url}}" style="width: 100%"/></div>
+                </div>
+                -->
+                <div class="col-md-1">
+                    {{#quickRemoveButton collection="Brainstorm1" _id=this._id class="brainstorm_delete"}}x{{/quickRemoveButton}}
+                    <!--
+                    {{> quickRemoveButton collection=Collections.Brainstorm1 _id=this._id class="btn btn-sm btn-danger del_brainstorm"}}
+                -->
                 </div>
             </div>
         </div>
@@ -118,8 +265,8 @@
 
 <template name="addBrainstorm1_setting">  
     {{#autoForm id="insertBrainstorm1_setting" type="insert" collection=Collections.Brainstorm1}}  
-    <div class="row">   
-        <div class="col-md-4">
+    <div class="row rowspacer">   
+        <div class="col-md-2">
             <div class="form-group {{#if afFieldIsInvalid name='idea'}}has-error{{/if}}">
                 <!--<label class="control-label">{{afFieldLabelText name='idea'}}</label>-->
                 {{> afFieldInput name='idea'}}
@@ -130,11 +277,11 @@
             </div>           
         </div>      
 
-        <div class="col-md-4">
+        <div class="col-md-1">
             <div class="form-group">
-                <br>
-                <button type="submit" class="btn btn-primary">Add Image</button>
-                <button type="reset" class="btn btn-default">Reset Form</button>
+                
+                <button type="submit" class="btn btn-primary">Add</button>
+                <!--<button type="reset" class="btn btn-default">Reset Form</button>-->
             </div>
         </div>  
     </div>    

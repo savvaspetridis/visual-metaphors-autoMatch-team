@@ -12,7 +12,7 @@ Schemas.Brainstorm1 = new SimpleSchema({
   brainstorm_type: {
     type: String,
     //label: "Shape",
-    allowedValues: ["setting", "object", "activity", "people",  "other"],//["circle", "rectangle", "cylinder", "other"],
+    allowedValues: ["setting", "object", "activity", "person",  "other"],//["circle", "rectangle", "cylinder", "other"],
     optional: true,    
   },
    
