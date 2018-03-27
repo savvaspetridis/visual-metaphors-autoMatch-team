@@ -20,6 +20,29 @@ AutoForm.hooks({
   }
 });
 
+Template.seeBrainstorm2.helpers({
+    brainstorm_objects: function(){
+        var concept = Router.current().params.concept2
+        var brainstorm_objects = Brainstorm2.find({brainstorm_type:'object', concept:concept});
+        return brainstorm_objects
+    },
+    brainstorm_activities: function(){
+        var concept = Router.current().params.concept2
+        var brainstorm_activities = Brainstorm2.find({brainstorm_type:'activity',concept:concept});
+        return brainstorm_activities
+    },
+    brainstorm_people: function(){
+        var concept = Router.current().params.concept2
+        var brainstorm_people = Brainstorm2.find({brainstorm_type:'person',concept:concept});
+        return brainstorm_people
+    },
+    brainstorm_settings: function(){
+        var concept = Router.current().params.concept2
+        var brainstorm_settings = Brainstorm2.find({brainstorm_type:'setting',concept:concept});
+        return brainstorm_settings
+    },
+});
+
 Template.insertImages2filter_headerOnly.helpers({
      concept2: function(){
         var concept = Router.current().params.concept2

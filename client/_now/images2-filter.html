@@ -6,10 +6,48 @@
         <div class='col-md-12'>
           {{> insertImages2filter_header}}
           {{> addImage2}}
+          {{> seeBrainstorm2}}
           {{> insertImages2filter}}
         </div>
       </div>       
     </div>        
+  </div>
+</template>
+
+<template name="seeBrainstorm2">
+  <div class='col-md-3'>
+    <div class="brainstormList2">
+      <h4> Brainstorming Ideas</h4> 
+      <hr>
+      <b>Objects:</b>
+      <ul>
+         {{#each brainstorm_objects}}
+        <li>{{idea}}</li>
+
+        {{/each}}
+      </ul>
+      <b>Activities:</b>
+      <ul>
+         {{#each brainstorm_activities}}
+        <li>{{idea}}</li>
+
+        {{/each}}
+      </ul>
+      <b>People:</b>
+      <ul>
+         {{#each brainstorm_people}}
+        <li>{{idea}}</li>
+
+        {{/each}}
+      </ul>
+      <b>Settings:</b>
+      <ul>
+         {{#each brainstorm_settings}}
+        <li>{{idea}}</li>
+
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -48,10 +86,9 @@
    <br>
     <div class="row">
         <div class="col-md-9">
-            <button class='btn instructions'>Instructions</button>
             <div class="taskheader">
                 
-            Filter Images for 
+            Annotate Images for <span class="conceptName">{{concept2}}</span>
                 
             </div>
         </div>
@@ -87,7 +124,7 @@ Progress: <b>{{countImagesHaveIconic}} / {{countImages}} </b>
       <table class="table table-bordered table-condensed">
         <thead>
           <tr>
-            <td style="width: 200px">Label</td>
+            <!-- <td style="width: 200px">Label</td> -->
             <td style="width: 360px">Image</td>
             <td style="width: 150px">Properties</td>
         
@@ -104,7 +141,7 @@ Progress: <b>{{countImagesHaveIconic}} / {{countImages}} </b>
 
 <template name="imageAnnotation2">
   <tr>
-    <td>{{label}}  </td>
+    <!-- <td>{{label}}  </td> -->
       
     <td>
         <canvas id="canvas_{{_id}}" class="editingCanvas" height="400" width="300"></canvas>

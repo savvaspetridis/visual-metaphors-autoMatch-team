@@ -16,7 +16,28 @@ AutoForm.hooks({
   },
 });
 
-
+Template.seeBrainstorm.helpers({
+    brainstorm_objects: function(){
+        var concept = Router.current().params.concept1
+        var brainstorm_objects = Brainstorm1.find({brainstorm_type:'object', concept:concept});
+        return brainstorm_objects
+    },
+    brainstorm_activities: function(){
+        var concept = Router.current().params.concept1
+        var brainstorm_activities = Brainstorm1.find({brainstorm_type:'activity', concept:concept});
+        return brainstorm_activities
+    },
+    brainstorm_people: function(){
+        var concept = Router.current().params.concept1
+        var brainstorm_people = Brainstorm1.find({brainstorm_type:'person', concept:concept});
+        return brainstorm_people
+    },
+    brainstorm_settings: function(){
+        var concept = Router.current().params.concept1
+        var brainstorm_settings = Brainstorm1.find({brainstorm_type:'setting', concept:concept});
+        return brainstorm_settings
+    },
+});
 
 Template.insertImages1filter.helpers({
   images1: function () {

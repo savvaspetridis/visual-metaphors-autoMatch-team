@@ -20,6 +20,17 @@
   position: fixed;
 }
 
+.brainstormList2{
+  height: 650px;
+  overflow-y: scroll;
+  width: 220px;
+  background-color: #b1edb6;
+  padding: 3px;
+  position: fixed;
+  top: 10;
+  right: 0;
+}
+
 .rowspacer{
     padding-top: 10px;
    

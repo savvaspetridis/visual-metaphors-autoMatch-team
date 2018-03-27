@@ -6,12 +6,63 @@
         <div class='col-md-12'>
           {{> insertImages1filter_header}}
           {{> addImage}}
+          {{> seeBrainstorm}}
           {{> insertImages1filter}}
         </div>
       </div>       
     </div>        
   </div>
 </template>
+
+
+<!--
+<template name="seeBrainstorm">
+{{#each brainstorm}}
+{{this}}<br>
+{{/each}}
+</template>
+-->
+
+<template name="seeBrainstorm">
+  <div class='col-md-3'>
+    <div class="brainstormList2">
+      <h4> Brainstorming Ideas</h4> 
+      <hr>
+      <b>Objects:</b>
+      <ul>
+         {{#each brainstorm_objects}}
+        <li>{{idea}}</li>
+
+        {{/each}}
+      </ul>
+      <b>Activities:</b>
+      <ul>
+         {{#each brainstorm_activities}}
+        <li>{{idea}}</li>
+
+        {{/each}}
+      </ul>
+      <b>People:</b>
+      <ul>
+         {{#each brainstorm_people}}
+        <li>{{idea}}</li>
+
+        {{/each}}
+      </ul>
+      <b>Settings:</b>
+      <ul>
+         {{#each brainstorm_settings}}
+        <li>{{idea}}</li>
+
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
+
+
+
+
 
 <template name="images1filterOnly">
   {{> header}} <!--{{> header1}} -->
@@ -35,7 +86,6 @@
     <br>
     <div class="row">
         <div class="col-md-9">
-            <button class='btn instructions'>Instructions</button>
             <div class="taskheader">
                 
             Annotate Images for <span class="conceptName">{{concept}}</span>
@@ -81,7 +131,7 @@ Progress: <b>{{countImagesHaveIconic}} / {{countImages}} </b>
       <table class="table table-bordered table-condensed">
         <thead>
           <tr>
-            <td style="width: 200px">Label</td>
+            <!-- <td style="width: 200px">Label</td> -->
             <td style="width: 360px">Image</td>
             <td style="width: 150px">Properties</td>        
           </tr>
@@ -95,9 +145,10 @@ Progress: <b>{{countImagesHaveIconic}} / {{countImages}} </b>
 </div>
 </template>
 
+
 <template name="imageAnnotation">
   <tr>
-    <td>{{label}}  </td>
+    <!-- <td>{{label}}  </td> -->
       
     <td>
       <canvas id="canvas_{{_id}}" class="editingCanvas" height="400" width="300"></canvas>

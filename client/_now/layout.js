@@ -44,6 +44,17 @@ Template.header1.events({
     var concept2 = Router.current().params.concept2   
     Router.go(task, {concept1: concept1, concept2: concept2})  
   },
+
+  'click .brainstorm2': function(){
+    console.log("brainstorm2")
+    var task = 'brainstorm2'
+    var metaphorPair_id = Router.current().params.metaphorPair_id
+    //Router.go('images1find', {metaphorPair_id: metaphorPair_id});
+
+    var concept1 = Router.current().params.concept1
+    var concept2 = Router.current().params.concept2   
+    Router.go(task, {concept1: concept1, concept2: concept2})  
+  },
   
   'click .images1find': function(){
     console.log("images for 1")

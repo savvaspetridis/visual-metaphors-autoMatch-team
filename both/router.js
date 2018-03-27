@@ -52,6 +52,26 @@ Router.route('/brainstorm1/:concept1/:concept2',{ // /images2filter/:metaphorPai
   }
 });
 
+Router.route('/brainstorm2/:concept1/:concept2',{ // /images2filter/:metaphorPair_id
+  name: "brainstorm2",
+  template: 'brainstorm2',
+  /*
+  layoutTemplate: 'standardLayout',
+  yieldTemplates: {
+      'header': {to: 'header'}
+  },
+  */
+  waitOn: function() {
+    //Meteor.subscribe("articles");
+    //Charlie added
+    //Meteor.subscribe("jokes");
+  },
+  data: function(){
+      Session.set('activeTab', "brainstorm2")
+      return {}
+  }
+});
+
 
 Router.route('/images1filter/:concept1/:concept2',{ // /images2filter/:metaphorPair_id
   name: "images1filter",
