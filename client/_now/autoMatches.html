@@ -57,10 +57,10 @@
             <div class="col-md-4">
                 <table>
                     <tr>
-                        <td>Shape:</td><td> <b>{{image_a.shape}}</b> - {{concept1}}</td>
+                        <td>Shape:</td><td> <b>{{image_a.shape}}</b> {{concept1}}</td>
                     </tr>
                     <tr>
-                        <td>Coverage: &nbsp;</td><td><b>all</b></td>
+                        <td>Coverage: &nbsp;</td><td><b>{{image_a.complexity}}</b></td>
                     </tr>
                 </table>               
             	<canvas id="a_{{unique_id}}" class="editingCanvas" height="400" width="300"></canvas>
@@ -76,7 +76,7 @@
                         <td>Shape:</td><td> <b>{{image_b.shape}}</b></td>
                     </tr>
                     <tr>
-                        <td>Coverage: &nbsp;</td><td><b>part</b></td>
+                        <td>Coverage: &nbsp;</td><td><b>{{image_b.complexity}}</b></td>
                     </tr>
                 </table> 
 

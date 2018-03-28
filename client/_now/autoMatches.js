@@ -294,84 +294,96 @@ var make_match_pairs = function(a_images, b_images){
 	return pairs
 }
 
+
 var find_pairs = function(concept1, concept2){
-		var pairs = []
-		//console.log(Images1.find({concept: concept1}).fetch())
+	var pairs = [];
+	var shape_list = ['circle', 'sphere', 'rectangle', 'box', 'cylinder'];
 
-		//var concept1 = Router.current().params.concept1	 // Session.get("concept1") //	
-		//var concept2 = Router.current().params.concept2  // Session.get("concept2") // 
-		
-		
-		// A TO B
-		// Sphere (deep)
-		var a_sphere = Images1.find({complexity: "whole", shape: "sphere", concept: concept1}).fetch()
-		var b_sphere = Images2.find({complexity: "part", shape: "sphere", concept: concept2}).fetch()
-		var pairs_sphere = make_match_pairs(a_sphere, b_sphere)
-		pairs = pairs.concat(pairs_sphere)
+	// ** Do NOT ignore depth, that is match circle to circle, sphere to sphere, etc.
+	for (i = 0; i < shape_list.length; i++) { 
 
-		// Circle (flat) 		
-		var a_circle = Images1.find({complexity: "whole", shape: "circle", concept: concept1}).fetch()
-		var b_circle = Images2.find({complexity: "part", shape: "circle", concept: concept2}).fetch()
-		var pairs_circle = make_match_pairs(a_circle, b_circle)
-		pairs = pairs.concat(pairs_circle)
-		
-		// Box (deep)
-		var a_box = Images1.find({complexity: "whole", shape: "box", concept: concept1}).fetch()
-		var b_box = Images2.find({complexity: "part", shape: "box", concept: concept2}).fetch()
-		var pairs_box = make_match_pairs(a_box, b_box)
-		pairs = pairs.concat(pairs_box)
+		// ** Fetch everything, whole/parts of 1 and whole/parts of 2
+		var con1_shape_whole = Images1.find({complexity: "whole", shape: shape_list[i], concept: concept1}).fetch();
+		var con1_shape_part = Images1.find({complexity: "part", shape: shape_list[i], concept: concept1}).fetch();
+		var con2_shape_whole = Images2.find({complexity: "whole", shape: shape_list[i], concept: concept2}).fetch();
+		var con2_shape_part = Images2.find({complexity: "part", shape: shape_list[i], concept: concept2}).fetch();
 
-		// Rectangle (flat) 		
-		var a_rectangle = Images1.find({complexity: "whole", shape: "rectangle", concept: concept1}).fetch()
-		var b_rectangle = Images2.find({complexity: "part", shape: "rectangle", concept: concept2}).fetch()
-		var pairs_rectangle = make_match_pairs(a_rectangle, b_rectangle)
-		pairs = pairs.concat(pairs_rectangle)
-		
+		// ** Map whole to part in both directions  
+		// This is what's normally done (with all the constraints)
+		var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part);
+		var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part);
+		pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
+		pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
 
-		// Cylinder (deep)
-		var a_cylinder = Images1.find({complexity: "whole", shape: "cylinder", concept: concept1 }).fetch()
-		var b_cylinder = Images2.find({complexity: "part", shape: "cylinder", concept: concept2 }).fetch()
-		var pairs_cylinder = make_match_pairs(a_cylinder, b_cylinder)
-		pairs = pairs.concat(pairs_cylinder)
-		
+		// ** Map part to part in both directions 
+		var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
+		var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
+		pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
+		pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
 
+		// ** Map whole to whole in both directions
+		var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
+		var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
+		pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
+		pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+	}
 
+	var depth_shape_list = [['circle','sphere'],['rectangle','box']];
 
-		
-		// B TO A
-		// Sphere (deep)
-		
-		var a_sphere = Images2.find({complexity: "whole", shape: "sphere", concept: concept2}).fetch()
-		var b_sphere = Images1.find({complexity: "part", shape: "sphere", concept: concept1}).fetch()
-		var pairs_sphere = make_match_pairs(a_sphere, b_sphere)
-		pairs = pairs.concat(pairs_sphere)
+	// ** IGNORE depth
+	for (i = 0; i < depth_shape_list.length; i++){
+		flat_shape = depth_shape_list[i][0];
+		deep_shape = depth_shape_list[i][1];
 
-		// Circle (flat) 		
-		var a_circle = Images2.find({complexity: "whole", shape: "circle", concept: concept2}).fetch()
-		var b_circle = Images1.find({complexity: "part", shape: "circle", concept: concept1}).fetch()
-		var pairs_circle = make_match_pairs(a_circle, b_circle)
-		pairs = pairs.concat(pairs_circle)
-		
-		// Box (deep)
-		var a_box = Images2.find({complexity: "whole", shape: "box", concept: concept2}).fetch()
-		var b_box = Images1.find({complexity: "part", shape: "box", concept: concept1}).fetch()
-		var pairs_box = make_match_pairs(a_box, b_box)
-		pairs = pairs.concat(pairs_box)
+		// Image1 == FLAT shape, Image2 == DEEP shape
+		var con1_shape_whole = Images1.find({complexity: "whole", shape: flat_shape, concept: concept1}).fetch();
+		var con1_shape_part = Images1.find({complexity: "part", shape: flat_shape, concept: concept1}).fetch();
+		var con2_shape_whole = Images2.find({complexity: "whole", shape: deep_shape, concept: concept2}).fetch();
+		var con2_shape_part = Images2.find({complexity: "part", shape: deep_shape, concept: concept2}).fetch();
 
-		// Rectangle (flat) 		
-		var a_rectangle = Images2.find({complexity: "whole", shape: "rectangle", concept: concept2}).fetch()
-		var b_rectangle = Images1.find({complexity: "part", shape: "rectangle", concept: concept1}).fetch()
-		var pairs_rectangle = make_match_pairs(a_rectangle, b_rectangle)
-		pairs = pairs.concat(pairs_rectangle)
-		
+		// Whole to Part
+		var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part);
+		var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part);
+		pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
+		pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
 
-		// Cylinder (deep)
-		var a_cylinder = Images2.find({complexity: "whole", shape: "cylinder", concept: concept2 }).fetch()
-		var b_cylinder = Images1.find({complexity: "part", shape: "cylinder", concept: concept1 }).fetch()
-		var pairs_cylinder = make_match_pairs(a_cylinder, b_cylinder)
-		pairs = pairs.concat(pairs_cylinder)
-			
-	return pairs	
+		// Part to Part
+		var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
+		var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
+		pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
+		pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+
+		// Whole to Whole
+		var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
+		var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
+		pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
+		pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+
+		// Image1 == DEEP shape, Image2 == FLAT shape
+		var con1_shape_whole = Images1.find({complexity: "whole", shape: deep_shape, concept: concept1}).fetch();
+		var con1_shape_part = Images1.find({complexity: "part", shape: deep_shape, concept: concept1}).fetch();
+		var con2_shape_whole = Images2.find({complexity: "whole", shape: flat_shape, concept: concept2}).fetch();
+		var con2_shape_part = Images2.find({complexity: "part", shape: flat_shape, concept: concept2}).fetch();
+
+		// Whole to Part
+		var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part);
+		var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part);
+		pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
+		pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
+
+		// Part to Part
+		var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
+		var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
+		pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
+		pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+
+		// Whole to Whole
+		var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
+		var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
+		pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
+		pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+	}
+	return pairs;
 }
 
 
