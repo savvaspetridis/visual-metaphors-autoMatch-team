@@ -43,6 +43,13 @@ Template.seeBrainstorm2.helpers({
     },
 });
 
+Template.insertImages2filter_header.helpers({
+     concept2: function(){
+        var concept = Router.current().params.concept2
+        return concept
+    },   
+})
+
 Template.insertImages2filter_headerOnly.helpers({
      concept2: function(){
         var concept = Router.current().params.concept2
