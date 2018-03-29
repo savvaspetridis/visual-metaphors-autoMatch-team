@@ -44,15 +44,38 @@ Template.insertImages1filter.helpers({
     // TODO: ONLY GET IMAGES! FOR THIS metaphor pari
     var metaphorPair_id = Router.current().params.metaphorPair_id
     var concept = Router.current().params.concept1
+
+    duplicates = Session.get('duplicates');
+    to_delete = Session.get('delete');
+    console.log('duplicate: ' + String(duplicates))
+    var duplicate_image_url = 0;
+    if(duplicates != undefined && duplicates != 'none'){
+        console.log(Images1.find({_id:duplicates}).fetch()[0])
+        duplicate_image_url = Images1.find({_id:duplicates}).fetch()[0].url;
+        Images1.insert({url:duplicate_image_url, concept:concept});
+    }
+
+    if(to_delete != undefined && to_delete != 'none'){
+        Images1.remove({_id:to_delete});
+    }
+
+
+
+    images = Images1.find({concept:concept}, {sort: {timestamp: -1}}).fetch();
+    console.log(images)
+
+    Session.set('duplicates','none');
     
     //console.log("metaphorPair_id: "+metaphorPair_id)
-    return Images1.find({
+    /*return Images1.find({
         concept:concept
         //metaphorPair_id: metaphorPair_id, 
         //createdBy: Meteor.userId()
     }, 
     {sort: {timestamp: -1}}                       
-    );
+    );*/
+
+    return images;
   },  
 });
 
@@ -122,6 +145,16 @@ Template.imageAnnotation.events({
         $("#update_"+id).show()
         $("#edit_"+id).hide()
 
+   },
+   'click .duplicateIt': function(event){
+        var id = $(event.target).data("id")
+        console.log(id)
+        Session.set('duplicates',id);
+   },
+   'click .deleteIt': function(event){
+        var id = $(event.target).data("id")
+        console.log(id)
+        Session.set('delete',id);
    },
 })
 

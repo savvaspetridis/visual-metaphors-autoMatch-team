@@ -55,13 +55,23 @@ Template.insertImages2filter.helpers({
     // TODO: ONLY GET IMAGES! FOR THIS metaphor pari
     var metaphorPair_id = Router.current().params.metaphorPair_id
     var concept = Router.current().params.concept2
-    return Images2.find({
-        //metaphorPair_id: metaphorPair_id, 
-        concept: concept
-        //createdBy: Meteor.userId()
-    }, 
-    {sort: {timestamp: -1}}                       
-    );
+    duplicates = Session.get('duplicates');
+    to_delete = Session.get('delete');
+
+    var duplicate_image_url = 0;
+    if(duplicates != undefined && duplicates != 'none'){
+        console.log(Images2.find({_id:duplicates}).fetch()[0])
+        duplicate_image_url = Images2.find({_id:duplicates}).fetch()[0].url;
+        Images2.insert({url:duplicate_image_url, concept:concept});
+    }
+
+    if(to_delete != undefined && to_delete != 'none'){
+        Images2.remove({_id:to_delete});
+    }
+
+    images = Images2.find({concept: concept}, {sort: {timestamp: -1}});
+    Session.set('duplicates','none');
+    return images; 
   },  
 });
 
@@ -107,6 +117,16 @@ Template.imageAnnotation2.events({
         $("#update_"+id).show()
         $("#edit_"+id).hide()
 
+   },
+    'click .duplicateIt': function(event){
+        var id = $(event.target).data("id")
+        console.log(id)
+        Session.set('duplicates',id);
+   },
+   'click .deleteIt': function(event){
+        var id = $(event.target).data("id")
+        console.log(id)
+        Session.set('delete',id);
    },
 })
 
