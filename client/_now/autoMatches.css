@@ -1,0 +1,23 @@
+.optionbut {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Style the active class (and buttons on mouse-over) */
+.activee{
+  background-color: #286bd6;
+  color: white;
+}
+
+.optionbut:hover {
+	background-color: #588ad8;
+	 color: white;
+}
+/*
+.activee:hover {
+  background-color: #f1f1f1;
+  color: black;
+}*/
