@@ -27,6 +27,9 @@
             </ul>
         </p>
         </div>
+        <hr>
+        {{> filters}}
+        <hr>
         <div class="row">
             <div class="col-md-4"><h3>Object A</h3></div>
             <div class="col-md-4"><h3>Object B</h3></div>
@@ -40,13 +43,22 @@
 
 		{{/each}}
 
-        <div class="centeredDiv">
+        <!--<div class="centeredDiv">
             <button class="next btn btn-success"  data-template="instructionsIntro" data-concept1="{{concept1}}" data-concept2="{{concept2}}"> Next </button> 
-        </div>    
+        </div> -->  
         <br>
         <br>
         <br>
 	</div>
+</template>
+
+<template name="filters">
+<div id="filter_matches">
+    <h5>Include:</h5>
+    <button class="optionbut" name="pp" id="pp">Part-to-Part</button>
+    <button class="optionbut" name="ww" id="ww">Whole-to-Whole</button>
+    <button class="optionbut" name="id" id="id">Ignore Depth</button>
+</div>
 </template>
 
 <template name="autoMatch" >

@@ -13,6 +13,47 @@ var saveAll = function(){
 	})
 }
 
+
+Template.filters.events({
+	'click .optionbut': function(event){
+		var filter_matches = $('#filter_matches');
+		var concept1 = Router.current().params.concept1		
+		var concept2 = Router.current().params.concept2
+		if(event.currentTarget.className == 'optionbut activee'){
+			event.currentTarget.className = 'optionbut';
+		}
+		else{
+			event.currentTarget.className = 'optionbut activee';
+		}
+
+		var filter_matches = $('#filter_matches');
+		var pp = $('#pp')[0].className
+		if(pp == 'optionbut'){
+			pp = false;
+		}
+		else{
+			pp = true;
+		}
+		var ww = $('#ww')[0].className
+		if(ww == 'optionbut'){
+			ww = false;
+		}
+		else{
+			ww = true;
+		}
+		var id = $('#id')[0].className
+		if(id == 'optionbut'){
+			id = false
+		}
+		else{
+			id = true;
+		}
+
+		Session.set('filters_activated', {'pp':pp, 'ww':ww, 'id':id});
+		
+	}
+})
+
 Template.showAutoMatches.events({
 	'click .next': function(event){
 		
@@ -77,7 +118,14 @@ Template.showAutoMatches.helpers({
 	count_pairs: function(){
 		var concept1 = Router.current().params.concept1	 // Session.get("concept1") //	
 		var concept2 = Router.current().params.concept2  // Session.get("concept2") // 
-		var pairs = find_pairs(concept1, concept2)
+		var filters_activated = Session.get('filters_activated');
+		var pairs = []
+		if(filters_activated != undefined){
+			pairs = find_pairs(concept1, concept2, filters_activated['pp'], filters_activated['ww'], filters_activated['id']);
+		}
+		else{
+			pairs = find_pairs(concept1, concept2, false, false, false);
+		}
 		//Session.set("pairs", pairs)
 		return pairs.length
 	},
@@ -89,7 +137,23 @@ Template.showAutoMatches.helpers({
 		var concept2 = Router.current().params.concept2
 		//console.log("find_pairs: "+concept1+" "+concept2)
 		
-		var pairs = find_pairs(concept1, concept2)
+		// var filter_matches = document.getElementById('filter_matches');
+		//console.log(filter_matches.innerHTML)
+		var filters_activated = Session.get('filters_activated');
+		console.log(filters_activated)
+		// var filter_matches = $('#filter_matches');
+		// console.log(filter_matches)
+
+		var pairs = [];
+
+		if(filters_activated != undefined){
+			pairs = find_pairs(concept1, concept2, filters_activated['pp'], filters_activated['ww'], filters_activated['id']);
+		}
+		else{
+			pairs = find_pairs(concept1, concept2, false, false, false);
+		}
+
+		//var pairs = find_pairs(concept1, concept2, true, true, true)
 		//console.log(pairs)
 		var pair_ids = _.map(pairs, function(pair){ 
 			var a_id = pair.image_a._id
@@ -99,7 +163,8 @@ Template.showAutoMatches.helpers({
 
 		//Session.set("pairs", pair_ids)
 		//console.log("len: "+pairs.length)
-		return pairs
+		// Session.set('pairs', pairs);
+		return pairs;
 
 	}
 })
@@ -295,7 +360,7 @@ var make_match_pairs = function(a_images, b_images){
 }
 
 
-var find_pairs = function(concept1, concept2){
+var find_pairs = function(concept1, concept2, part_to_part, whole_to_whole, ignore_depth){
 	var pairs = [];
 	var shape_list = ['circle', 'sphere', 'rectangle', 'box', 'cylinder'];
 
@@ -316,72 +381,86 @@ var find_pairs = function(concept1, concept2){
 		pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
 
 		// ** Map part to part in both directions 
-		var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
-		var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
-		pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
-		pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+		if(part_to_part == true){
+			var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
+			var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
+			pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
+			pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+		}
 
 		// ** Map whole to whole in both directions
-		var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
-		var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
-		pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
-		pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+		if(whole_to_whole == true){
+			var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
+			var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
+			pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
+			pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+		}
 	}
 
 	var depth_shape_list = [['circle','sphere'],['rectangle','box']];
 
 	// ** IGNORE depth
-	for (i = 0; i < depth_shape_list.length; i++){
-		flat_shape = depth_shape_list[i][0];
-		deep_shape = depth_shape_list[i][1];
+	if(ignore_depth == true){
+		for (i = 0; i < depth_shape_list.length; i++){
+			flat_shape = depth_shape_list[i][0];
+			deep_shape = depth_shape_list[i][1];
 
-		// Image1 == FLAT shape, Image2 == DEEP shape
-		var con1_shape_whole = Images1.find({complexity: "whole", shape: flat_shape, concept: concept1}).fetch();
-		var con1_shape_part = Images1.find({complexity: "part", shape: flat_shape, concept: concept1}).fetch();
-		var con2_shape_whole = Images2.find({complexity: "whole", shape: deep_shape, concept: concept2}).fetch();
-		var con2_shape_part = Images2.find({complexity: "part", shape: deep_shape, concept: concept2}).fetch();
+			// Image1 == FLAT shape, Image2 == DEEP shape
+			var con1_shape_whole = Images1.find({complexity: "whole", shape: flat_shape, concept: concept1}).fetch();
+			var con1_shape_part = Images1.find({complexity: "part", shape: flat_shape, concept: concept1}).fetch();
+			var con2_shape_whole = Images2.find({complexity: "whole", shape: deep_shape, concept: concept2}).fetch();
+			var con2_shape_part = Images2.find({complexity: "part", shape: deep_shape, concept: concept2}).fetch();
 
-		// Whole to Part
-		var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part);
-		var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part);
-		pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
-		pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
+			// Whole to Part
+			var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part);
+			var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part);
+			pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
+			pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
 
-		// Part to Part
-		var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
-		var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
-		pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
-		pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+			// Part to Part
+			if(part_to_part == true){
+				var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
+				var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
+				pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
+				pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+			}
 
-		// Whole to Whole
-		var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
-		var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
-		pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
-		pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+			// Whole to Whole
+			if(whole_to_whole == true){
+				var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
+				var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
+				pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
+				pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+			}
 
-		// Image1 == DEEP shape, Image2 == FLAT shape
-		var con1_shape_whole = Images1.find({complexity: "whole", shape: deep_shape, concept: concept1}).fetch();
-		var con1_shape_part = Images1.find({complexity: "part", shape: deep_shape, concept: concept1}).fetch();
-		var con2_shape_whole = Images2.find({complexity: "whole", shape: flat_shape, concept: concept2}).fetch();
-		var con2_shape_part = Images2.find({complexity: "part", shape: flat_shape, concept: concept2}).fetch();
+			// Image1 == DEEP shape, Image2 == FLAT shape
+			var con1_shape_whole = Images1.find({complexity: "whole", shape: deep_shape, concept: concept1}).fetch();
+			var con1_shape_part = Images1.find({complexity: "part", shape: deep_shape, concept: concept1}).fetch();
+			var con2_shape_whole = Images2.find({complexity: "whole", shape: flat_shape, concept: concept2}).fetch();
+			var con2_shape_part = Images2.find({complexity: "part", shape: flat_shape, concept: concept2}).fetch();
 
-		// Whole to Part
-		var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part);
-		var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part);
-		pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
-		pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
+			// Whole to Part
+			var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part);
+			var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part);
+			pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
+			pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
 
-		// Part to Part
-		var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
-		var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
-		pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
-		pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+			// Part to Part
+			if(part_to_part == true){
+				var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
+				var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
+				pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
+				pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+			}
 
-		// Whole to Whole
-		var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
-		var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
-		pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
-		pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+			// Whole to Whole
+			if(whole_to_whole == true){
+				var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
+				var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
+				pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
+				pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+			}
+		}
 	}
 	return pairs;
 }
