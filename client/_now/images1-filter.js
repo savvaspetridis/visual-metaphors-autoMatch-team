@@ -59,21 +59,10 @@ Template.insertImages1filter.helpers({
         Images1.remove({_id:to_delete});
     }
 
-
-
     images = Images1.find({concept:concept}, {sort: {timestamp: -1}}).fetch();
     console.log(images)
 
     Session.set('duplicates','none');
-    
-    //console.log("metaphorPair_id: "+metaphorPair_id)
-    /*return Images1.find({
-        concept:concept
-        //metaphorPair_id: metaphorPair_id, 
-        //createdBy: Meteor.userId()
-    }, 
-    {sort: {timestamp: -1}}                       
-    );*/
 
     return images;
   },  
@@ -85,13 +74,20 @@ Template.insertImages1filter_header.helpers({
         var concept = Router.current().params.concept1
         return concept
     },   
+    count_images: function(){
+        var concept = Router.current().params.concept1
+        return Images1.find({concept:concept}).fetch().length
+    },
 })
 
 Template.insertImages1filter_headerOnly.helpers({
      concept: function(){
         var concept = Router.current().params.concept1
         return concept
-    },   
+    },  
+    count_images: function(){
+        return 5;
+    }, 
 })
 
 Template.insertImages1filter_headerOnly.events({

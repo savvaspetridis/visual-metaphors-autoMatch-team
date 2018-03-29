@@ -48,6 +48,10 @@ Template.insertImages2filter_header.helpers({
         var concept = Router.current().params.concept2
         return concept
     },   
+    count_images: function(){
+        var concept = Router.current().params.concept2
+        return Images2.find({concept:concept}).fetch().length
+    },
 })
 
 Template.insertImages2filter_headerOnly.helpers({
