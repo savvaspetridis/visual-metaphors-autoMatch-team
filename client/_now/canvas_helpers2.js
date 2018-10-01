@@ -146,8 +146,11 @@ initImageBToMixCanvas = function(mixCanvas, object_data, shape){
 
 var calculate_new_angle = function(phi_of_b, phi_of_a, handle_location_a, a_classification){
     var new_angle = 0;
+    
     if(a_classification != 'long_handle~angled_hotdog' && a_classification != 'short_handle~angled_hotdog'){
+        //console.log("calculate_new_angle: case 1")
         if(handle_location_a == 'short'){
+            //console.log("calculate_new_angle: case 1.1")
             if(phi_of_b <= 269){
                 new_angle = phi_of_b + 90;
             }
@@ -157,10 +160,13 @@ var calculate_new_angle = function(phi_of_b, phi_of_a, handle_location_a, a_clas
             }
         }
         else{
+            //console.log("calculate_new_angle: case 1.2")
             new_angle = phi_of_b;
         }
     }
+
     else{
+        //console.log("calculate_new_angle: case 2")
         if(a_classification == 'long_handle~angled_hotdog'){
             new_angle = phi_of_b + (360 - phi_of_a);
         }
@@ -210,15 +216,27 @@ initImageAToMixCanvas = function( object_data_a, object_data_b, enlivened_shape_
     var obd_b = obj_arr[1];
 
     // Get necesry data for angle calculation
-    var phi_of_a = obd_a[0].phi; 
+    var phi_of_a = obd_a[0].phi;
+    //var phi_of_a = obd_a[0].angle;
+
     var a_classification = obd_a[0].classification;
     var handle_location_a = obd_a[0].handle_location; 
     var phi_of_b = obd_b[0].phi;
+    //var phi_of_b = obd_b[0].angle;
+
     var handle_location_b = obd_b[0].handle_location; 
     var b_classification = obd_b[0].classification;
 
+    //console.log(phi_of_a, phi_of_b)
+    //console.log(a_classification)
+    //console.log(handle_location_a, handle_location_b)
+
     // ROTATE A to B's Phi Angle, then perform necessary transformation from Phi to Theta (depending on case)
     var new_angle = calculate_new_angle(phi_of_b, phi_of_a, handle_location_a, a_classification);
+
+    //This was sort of an experiment to see if I could correct some ellipse angles.
+    //var new_angle = phi_of_b - phi_of_a
+    //console.log("new_angle:",new_angle)
     var imageParamters = scaleAndTranslateImageAonMixCanvas(object_data_a, object_data_b, enlivened_shape_data_a, enlivened_shape_data_b, mixCanvas, shape_a, shape_b, opacity, new_angle);
     imageParamters['clipTo'] = clip_to;
 

@@ -15,50 +15,73 @@
 <template name="showAutoMatches">
 	<div>
         <div class="row">
-        <h1>Matches for '{{concept1}}' and '{{concept2}}' ({{count_pairs}})</h1>
-        <p>
-        Based on the shape and coverage annotations, we have <b>automatically calculated</b> which pairs of shapes will blend well.
-        </p>
-        <p>
-        Look at each blend and make adjustments that improve the blend.
-            <ul>
-            <li><b>Adjust</b> the shape drawings to improve the fit of a blend.</li>
-            <li><b>Reclassify</b> shapes and coverages to find more blends.</li>
-            </ul>
-        </p>
-        </div>
-        <hr>
-        {{> filters}}
-        <hr>
-        <div class="row">
-            <div class="col-md-4"><h3>Object A</h3></div>
-            <div class="col-md-4"><h3>Object B</h3></div>
-            <div class="col-md-4"><h3>Blend</h3></div>
-        </div>
-		{{#each pair_mixes}}
-        
-			{{> autoMatch}}
-        
-            
+            <h1><b>'{{concept1}}'</b> and <b>'{{concept2}}'</b> ({{count_pairs}} autoblends)</h1>
+        </div>        
+        {{> shape_counts}}
 
+        {{> filters}}
+
+        <hr>
+
+           
+
+        <h1 id="wp_section"> Whole-Part </h1>
+		{{#each pair_mixes_wp}}        
+			{{> autoMatch}}
 		{{/each}}
 
-        <!--<div class="centeredDiv">
-            <button class="next btn btn-success"  data-template="instructionsIntro" data-concept1="{{concept1}}" data-concept2="{{concept2}}"> Next </button> 
-        </div> -->  
+        <h1 id="wpi_section"> Whole-Part, ignore Depth </h1>                
+        {{#each pair_mixes_wpi}}        
+            {{> autoMatch}}
+        {{/each}}
+    
+
+        <h1 id="pp_section"> Part-Part </h1>
+        {{#each pair_mixes_pp}}        
+            {{> autoMatch}}
+        {{/each}}
+
+        <h1 id="ww_section"> Whole-Whole </h1>
+        {{#each pair_mixes_ww}}
+            {{> autoMatch}}
+        {{/each}}
+
         <br>
         <br>
         <br>
 	</div>
 </template>
 
+<template name="shape_counts">
+        Circles: <span class="shape_count">{{count_circles1}}</span> 
+            | Spheres: <span class="shape_count">{{count_spheres1}} </span> 
+            | Rectangles: <span class="shape_count">{{count_rectangles1}} </span> 
+            | Boxes: <span class="shape_count">{{count_boxes1}} </span> 
+            | Cylinders: <span class="shape_count">{{count_cylinders1}}</span>                         
+
+            | Whole: <span class="shape_count">{{count_whole1}} </span> 
+            | Part <span class="shape_count">{{count_part1}}</span> 
+            <br>
+
+        Circles: <span class="shape_count">{{count_circles2}}</span> 
+            | Spheres: <span class="shape_count">{{count_spheres2}} </span> 
+            | Rectangles: <span class="shape_count">{{count_rectangles2}} </span> 
+            | Boxes: <span class="shape_count">{{count_boxes2}} </span> 
+            | Cylinders: <span class="shape_count">{{count_cylinders2}}</span>             
+
+            | Whole: <span class="shape_count">{{count_whole2}} </span> 
+            | Part <span class="shape_count">{{count_part2}}</span>  
+
+</template>
+
 <template name="filters">
-<div id="filter_matches">
-    <h5>Include:</h5>
-    <button class="optionbut" name="pp" id="pp">Part-to-Part</button>
-    <button class="optionbut" name="ww" id="ww">Whole-to-Whole</button>
-    <button class="optionbut" name="id" id="id">Ignore Depth</button>
-</div>
+    <div id="filter_matches">
+        <button class="optionbut" name="wp" id="wp">Whole-to-Part ({{num_wp_pairs}})</button>
+        <button class="optionbut" name="wpi" id="wpi">Whole-to-Part, Ignore Depth ({{num_wpi_pairs}})</button>
+        <button class="optionbut" name="pp" id="pp">Part-to-Part ({{num_pp_pairs}})</button>
+        <button class="optionbut" name="ww" id="ww">Whole-to-Whole ({{num_ww_pairs}})</button>
+        
+    </div>
 </template>
 
 <template name="autoMatch" >
@@ -111,7 +134,10 @@
                     Saved!
                 {{else}}
                 <button id="saveAutoBlend_{{unique_id}}">Save Match</button>
+                <!--
                 <button id="reverseAutoBlend_{{unique_id}}">Reverse</button>
+                <button id="unclipAutoBlend_{{unique_id}}">Unclip</button>
+            -->
                 {{/if}}
             </div>
     	</div>

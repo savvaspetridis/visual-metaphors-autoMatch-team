@@ -14,93 +14,191 @@ var saveAll = function(){
 }
 
 
+Template.filters.helpers({
+
+	num_wp_pairs: function(){
+		var concept1 = Router.current().params.concept1	 // Session.get("concept1") //	
+		var concept2 = Router.current().params.concept2  // Session.get("concept2") // 
+		var filters_activated = Session.get('filters_activated');
+		var pairs = []
+		pairs = find_pairs(concept1, concept2, false, false, false);
+		/*
+		if(filters_activated != undefined){
+			pairs = find_pairs(concept1, concept2, filters_activated['pp'], filters_activated['ww'], filters_activated['id']);
+		}
+		else{
+			pairs = find_pairs(concept1, concept2, false, false, false);
+		}
+		*/
+		//Session.set("pairs", pairs)
+		return pairs.length
+	},
+
+	num_wpi_pairs: function(){
+		var concept1 = Router.current().params.concept1	 // Session.get("concept1") //	
+		var concept2 = Router.current().params.concept2  // Session.get("concept2") // 
+		var filters_activated = Session.get('filters_activated');
+		var pairs = []
+		pairs = find_pairs(concept1, concept2, false, false, true);
+		/*
+		if(filters_activated != undefined){
+			pairs = find_pairs(concept1, concept2, filters_activated['pp'], filters_activated['ww'], filters_activated['id']);
+		}
+		else{
+			pairs = find_pairs(concept1, concept2, false, false, false);
+		}
+		*/
+		//Session.set("pairs", pairs)
+		return pairs.length
+	},
+
+
+	num_pp_pairs: function(){
+		var concept1 = Router.current().params.concept1	 // Session.get("concept1") //	
+		var concept2 = Router.current().params.concept2  // Session.get("concept2") // 
+		var filters_activated = Session.get('filters_activated');
+		var pairs = []
+
+		pairs = find_pairs(concept1, concept2, true, false, false);
+		/*
+		if(filters_activated != undefined){
+			pairs = find_pairs(concept1, concept2, filters_activated['pp'], filters_activated['ww'], filters_activated['id']);
+		}
+		else{
+			pairs = find_pairs(concept1, concept2, true, false, false);
+		}
+		*/
+		//Session.set("pairs", pairs)
+		return pairs.length
+	},
+	num_ww_pairs: function(){
+		var concept1 = Router.current().params.concept1	 // Session.get("concept1") //	
+		var concept2 = Router.current().params.concept2  // Session.get("concept2") // 
+		var filters_activated = Session.get('filters_activated');
+		var pairs = []
+
+		pairs = find_pairs(concept1, concept2, false, true, false);
+		/*
+		if(filters_activated != undefined){
+			pairs = find_pairs(concept1, concept2, filters_activated['pp'], filters_activated['ww'], filters_activated['id']);
+		}
+		else{
+			pairs = find_pairs(concept1, concept2, true, false, false);
+		}
+		*/
+		//Session.set("pairs", pairs)
+		return pairs.length
+	},
+})
+
 Template.filters.events({
 	'click .optionbut': function(event){
-		var filter_matches = $('#filter_matches');
+		//var filter_matches = $('#filter_matches');
 		var concept1 = Router.current().params.concept1		
 		var concept2 = Router.current().params.concept2
-		if(event.currentTarget.className == 'optionbut activee'){
-			event.currentTarget.className = 'optionbut';
-		}
-		else{
-			event.currentTarget.className = 'optionbut activee';
-		}
-
-		var filter_matches = $('#filter_matches');
-		var pp = $('#pp')[0].className
-		if(pp == 'optionbut'){
-			pp = false;
-		}
-		else{
-			pp = true;
-		}
-		var ww = $('#ww')[0].className
-		if(ww == 'optionbut'){
-			ww = false;
-		}
-		else{
-			ww = true;
-		}
-		var id = $('#id')[0].className
-		if(id == 'optionbut'){
-			id = false
-		}
-		else{
-			id = true;
-		}
-
-		Session.set('filters_activated', {'pp':pp, 'ww':ww, 'id':id});
+		//console.log(event.currentTarget.id)
 		
+		//set active button		
+		$(".optionbut").each(function(o){
+			//console.log($(this).attr("id"))
+			$(this).removeClass("activee")
+		})
+		$(event.currentTarget).addClass("activee")
+
+		//var elmnt = document.getElementById("content");
+		var id = $(event.currentTarget).attr('id')
+		$("#"+id+"_section")[0].scrollIntoView();
+				
 	}
 })
 
 Template.showAutoMatches.events({
-	'click .next': function(event){
-		
+	'click .next': function(event){		
 		var concept1 = Router.current().params.concept1
 		var concept2 = Router.current().params.concept2
-		//console.log("next: "+concept1+" "+concept2)
-		//saveAll() 
-		//console.log(Template.instance())
-		//return
-		Router.go("autoMatches", {concept1: concept1, concept2: concept2})
-		
-		if(concept1== "orange" && concept2 == "summer"){
-			//var go = "/autoMatches/"++"/"
-			//console.log("/autoMatches/orange/winter")
-			//Router.go("/autoMatches/orange/winter")
-			//Router.go("autoMatches", {concept1: "orange", concept2: "winter"})
-			var newURL = "http://"+window.location.host+"/autoMatches/orange/winter"
-        	window.open(newURL, '_blank');
-		}
-		if(concept1== "orange" && concept2 == "winter"){
-			//var go = "/autoMatches/"++"/"
-			//console.log("/autoMatches/Starbucks/summer")
-			//Router.go("/autoMatches/Starbucks/summer")
-			//Router.go("autoMatches", {concept1: "Starbucks", concept2: "summer"})
-			var newURL = "http://"+window.location.host+"/autoMatches/Starbucks/summer"
-        	window.open(newURL, '_blank');
 
-		}
-		if(concept1== "Starbucks" && concept2 == "summer"){
-			//var go = "/autoMatches/"++"/"
-			//console.log("/autoMatches/Starbucks/winter")
-			//Router.go("/autoMatches/Starbucks/winter")
-			//Router.go("autoMatches", {concept1: "Starbucks", concept2: "winter"})
-			var newURL = "http://"+window.location.host+"/autoMatches/Starbucks/winter"
-        	window.open(newURL, '_blank');
-		}
-		if(concept1== "Starbucks" && concept2 == "winter"){
-			//var go = "/autoMatches/"++"/"
-			//console.log("/")
-			//Router.go("/")
-			var newURL = "http://"+window.location.host//+"/autoMatches/Starbucks/winter"
-        	window.open(newURL, '_blank');
-		}
-
+		Router.go("autoMatches", {concept1: concept1, concept2: concept2})	
 	}
 })
 
+
+Template.shape_counts.helpers({
+	//CONCEPT 1
+	count_circles1: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "circle"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_spheres1: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "sphere"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_rectangles1: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "rectangle"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_boxes1: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "box"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_cylinders1: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "cylinder"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_whole1: function(){
+        var concept = Router.current().params.concept1
+        var this_complexity = "whole"
+        return Images1.find({concept:concept, complexity: this_complexity}).fetch().length
+    },
+    count_part1: function(){
+        var concept = Router.current().params.concept1
+        var this_complexity = "part"
+        return Images1.find({concept:concept, complexity: this_complexity}).fetch().length
+    },
+
+
+    //CONCEPT 2
+    count_circles2: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "circle"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_spheres2: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "sphere"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_rectangles2: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "rectangle"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_boxes2: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "box"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_cylinders2: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "cylinder"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_whole2: function(){
+        var concept = Router.current().params.concept2
+        var this_complexity = "whole"
+        return Images2.find({concept:concept, complexity: this_complexity}).fetch().length
+    },
+    count_part2: function(){
+        var concept = Router.current().params.concept2
+        var this_complexity = "part"
+        return Images2.find({concept:concept, complexity: this_complexity}).fetch().length
+    }
+
+})
 
 Template.showAutoMatches.helpers({
 
@@ -118,55 +216,85 @@ Template.showAutoMatches.helpers({
 	count_pairs: function(){
 		var concept1 = Router.current().params.concept1	 // Session.get("concept1") //	
 		var concept2 = Router.current().params.concept2  // Session.get("concept2") // 
-		var filters_activated = Session.get('filters_activated');
-		var pairs = []
-		if(filters_activated != undefined){
-			pairs = find_pairs(concept1, concept2, filters_activated['pp'], filters_activated['ww'], filters_activated['id']);
-		}
-		else{
-			pairs = find_pairs(concept1, concept2, false, false, false);
-		}
-		//Session.set("pairs", pairs)
+		
+		//This is JUST Whole-Part pairs
+		pairs = find_pairs(concept1, concept2, false, false, false);
+
 		return pairs.length
 	},
-	pair_mixes: function(){
-		
-		
-		//console.log(this)
+
+
+
+
+	
+	pair_mixes_wp: function(){
+
 		var concept1 = Router.current().params.concept1		
 		var concept2 = Router.current().params.concept2
-		//console.log("find_pairs: "+concept1+" "+concept2)
-		
-		// var filter_matches = document.getElementById('filter_matches');
-		//console.log(filter_matches.innerHTML)
-		var filters_activated = Session.get('filters_activated');
-		console.log(filters_activated)
-		// var filter_matches = $('#filter_matches');
-		// console.log(filter_matches)
 
-		var pairs = [];
 
-		if(filters_activated != undefined){
-			pairs = find_pairs(concept1, concept2, filters_activated['pp'], filters_activated['ww'], filters_activated['id']);
-		}
-		else{
-			pairs = find_pairs(concept1, concept2, false, false, false);
-		}
+		var pairs = find_pairs(concept1, concept2, false, false, false);
 
-		//var pairs = find_pairs(concept1, concept2, true, true, true)
-		//console.log(pairs)
 		var pair_ids = _.map(pairs, function(pair){ 
 			var a_id = pair.image_a._id
 			var b_id = pair.image_b._id
 			return [a_id, b_id]
 		})
 
-		//Session.set("pairs", pair_ids)
-		//console.log("len: "+pairs.length)
-		// Session.set('pairs', pairs);
 		return pairs;
 
-	}
+	},
+	pair_mixes_wpi: function(){
+
+		var concept1 = Router.current().params.concept1		
+		var concept2 = Router.current().params.concept2
+
+
+		var pairs = find_pairs(concept1, concept2, false, false, true);
+
+		var pair_ids = _.map(pairs, function(pair){ 
+			var a_id = pair.image_a._id //+ "_i"
+			var b_id = pair.image_b._id //+ "_i"
+			return [a_id, b_id]
+		})
+
+		return pairs;
+
+	},
+
+	pair_mixes_pp: function(){
+
+		var concept1 = Router.current().params.concept1		
+		var concept2 = Router.current().params.concept2
+
+		var pairs = find_pairs(concept1, concept2, true, false, false);
+
+		var pair_ids = _.map(pairs, function(pair){ 
+			var a_id = pair.image_a._id
+			var b_id = pair.image_b._id
+			return [a_id, b_id]
+		})
+
+		return pairs;
+
+	},
+
+	pair_mixes_ww: function(){
+
+		var concept1 = Router.current().params.concept1		
+		var concept2 = Router.current().params.concept2
+
+		var pairs = find_pairs(concept1, concept2, false, true, false);
+
+		var pair_ids = _.map(pairs, function(pair){ 
+			var a_id = pair.image_a._id
+			var b_id = pair.image_b._id
+			return [a_id, b_id]
+		})
+
+		return pairs;
+
+	},
 })
 
 var determine_handle_location = function(height_over_width){
@@ -245,7 +373,7 @@ var revise_based_on_classification = function(classification, handle_location){
 	}
 }
 
-var make_match_pairs = function(a_images, b_images){
+var make_match_pairs = function(a_images, b_images, whichImageIsFirst){ // whichImageIsFirst = "Images1_first" OR "Images2_first" - we need this to save the data to know which Collection to find the image_id in, Images1 or Images2
 	var pairs = []
 	_.each(a_images, function(image_a){
 		_.each(b_images, function(image_b){
@@ -262,6 +390,7 @@ var make_match_pairs = function(a_images, b_images){
 		    
 		    var inMixes = (mixInDb > 0)
 
+		    //if(true){
 		    if(shape_a == "rect" && shape_b == "rect"){
 			    var object_a_shape_data = _.filter(object_a_data.objects, function(o){
 			    	return o.type == shape_a
@@ -340,6 +469,7 @@ var make_match_pairs = function(a_images, b_images){
 		    		pairs.push({
 						image_a: image_a,
 						image_b: image_b,
+						whichImageIsFirst: whichImageIsFirst,
 						unique_id: image_a._id+"_"+image_b._id,
 						inMixes: inMixes
 					})
@@ -349,6 +479,7 @@ var make_match_pairs = function(a_images, b_images){
 		    	pairs.push({
 					image_a: image_a,
 					image_b: image_b,
+					whichImageIsFirst: whichImageIsFirst,
 					unique_id: image_a._id+"_"+image_b._id,
 					inMixes: inMixes
 				})
@@ -364,43 +495,54 @@ var find_pairs = function(concept1, concept2, part_to_part, whole_to_whole, igno
 	var pairs = [];
 	var shape_list = ['circle', 'sphere', 'rectangle', 'box', 'cylinder'];
 
+
 	// ** Do NOT ignore depth, that is match circle to circle, sphere to sphere, etc.
-	for (i = 0; i < shape_list.length; i++) { 
+	if(ignore_depth == false){
+		for (i = 0; i < shape_list.length; i++) { 
 
-		// ** Fetch everything, whole/parts of 1 and whole/parts of 2
-		var con1_shape_whole = Images1.find({complexity: "whole", shape: shape_list[i], concept: concept1}).fetch();
-		var con1_shape_part = Images1.find({complexity: "part", shape: shape_list[i], concept: concept1}).fetch();
-		var con2_shape_whole = Images2.find({complexity: "whole", shape: shape_list[i], concept: concept2}).fetch();
-		var con2_shape_part = Images2.find({complexity: "part", shape: shape_list[i], concept: concept2}).fetch();
+			// ** Fetch everything, whole/parts of 1 and whole/parts of 2
+			var con1_shape_whole = Images1.find({complexity: "whole", shape: shape_list[i], concept: concept1}).fetch();
+			var con1_shape_part = Images1.find({complexity: "part", shape: shape_list[i], concept: concept1}).fetch();
+			var con2_shape_whole = Images2.find({complexity: "whole", shape: shape_list[i], concept: concept2}).fetch();
+			var con2_shape_part = Images2.find({complexity: "part", shape: shape_list[i], concept: concept2}).fetch();
 
-		// ** Map whole to part in both directions  
-		// This is what's normally done (with all the constraints)
-		var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part);
-		var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part);
-		pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
-		pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
+			// ** Map whole to part in both directions  
+			// This is what's normally done (with all the constraints)
+			var con1_a_and_con2_b_w_to_p = make_match_pairs(con1_shape_whole, con2_shape_part, "Images1_first");
+			var con2_a_and_con1_b_w_to_p = make_match_pairs(con2_shape_whole, con1_shape_part, "Images2_first");
+			pairs = pairs.concat(con1_a_and_con2_b_w_to_p);
+			pairs = pairs.concat(con2_a_and_con1_b_w_to_p);
 
-		// ** Map part to part in both directions 
-		if(part_to_part == true){
-			var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part);
-			var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part);
-			pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
-			pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
-		}
+			// ** Map part to part in both directions 
+			if(part_to_part == true){
+				/*
+				console.log("")
+				console.log("con1_shape_part")
+				console.log(con1_shape_part)
+				console.log("con2_shape_part")
+				console.log(con2_shape_part)
+				*/
+				var con1_a_and_con2_b_p_to_p = make_match_pairs(con1_shape_part, con2_shape_part, "Images1_first");
+				var con2_a_and_con1_b_p_to_p = make_match_pairs(con2_shape_part, con1_shape_part, "Images2_first");
+				//pairs = pairs.concat(con1_a_and_con2_b_p_to_p);
+				pairs = con1_a_and_con2_b_p_to_p;
+				pairs = pairs.concat(con2_a_and_con1_b_p_to_p);
+				//console.log(pairs)
+			}
 
-		// ** Map whole to whole in both directions
-		if(whole_to_whole == true){
-			var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole);
-			var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole);
-			pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
-			pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+			// ** Map whole to whole in both directions
+			if(whole_to_whole == true){
+				var con1_a_and_con2_b_w_to_w = make_match_pairs(con1_shape_whole, con2_shape_whole, "Images1_first");
+				var con2_a_and_con1_b_w_to_w = make_match_pairs(con2_shape_whole, con1_shape_whole, "Images2_first");
+				//pairs = pairs.concat(con1_a_and_con2_b_w_to_w);
+				pairs = con1_a_and_con2_b_w_to_w;
+				pairs = pairs.concat(con2_a_and_con1_b_w_to_w);
+			}
 		}
 	}
 
-	var depth_shape_list = [['circle','sphere'],['rectangle','box']];
-
-	// ** IGNORE depth
 	if(ignore_depth == true){
+		depth_shape_list = [['circle', 'sphere'], ['rectangle', 'box'], ['cylinder', 'box']]
 		for (i = 0; i < depth_shape_list.length; i++){
 			flat_shape = depth_shape_list[i][0];
 			deep_shape = depth_shape_list[i][1];
@@ -462,6 +604,10 @@ var find_pairs = function(concept1, concept2, part_to_part, whole_to_whole, igno
 			}
 		}
 	}
+	if(part_to_part == true){
+		//console.log("part_to_part")
+		//console.log(pairs)
+	}
 	return pairs;
 }
 
@@ -469,12 +615,9 @@ var find_pairs = function(concept1, concept2, part_to_part, whole_to_whole, igno
 
 
 Template.autoMatch.onRendered(function() {
-
-
-	console.log("AUTORENDERED")
-	//console.log(Session.get("foo"))
-    var image_a = this.data['image_a']
+	var image_a = this.data['image_a']
     var image_b = this.data['image_b']
+    var whichImageIsFirst = this.data['whichImageIsFirst']
 
     //console.log("autoMatch render: ",Session.get("concept1"), Session.get("concept2"))
     //console.log("autoMatch render: ",image_a.label+" "+image_b.label)
@@ -532,9 +675,26 @@ Template.autoMatch.onRendered(function() {
        //console.log("save auto blend: "+ unique_id)
        var concept1 = Router.current().params.concept1
        var concept2 = Router.current().params.concept2
-       save_mix_canvas(mix_canvas, concept1, concept2, image_a._id, image_b._id)
+       save_mix_canvas(mix_canvas, concept1, concept2, image_a._id, image_b._id, whichImageIsFirst)
     })  
     $("#reverseAutoBlend_"+unique_id).click(function(){
+       var current_angle = mix_canvas['_objects'][1]['angle'];
+       var new_angle = 0;
+       if(mix_canvas['_objects'][1]['reversed'] == undefined || mix_canvas['_objects'][1]['reversed'] == false){
+       		new_angle = current_angle + 180; 
+       		mix_canvas['_objects'][1]['angle'] = new_angle;
+       		mix_canvas['_objects'][1]['reversed'] = true;
+       }
+       else{
+       		new_angle = current_angle - 180; 
+       		mix_canvas['_objects'][1]['angle'] = new_angle;
+       		mix_canvas['_objects'][1]['reversed'] = false;
+       }
+       mix_canvas.renderAll();
+    }) 
+
+    $("#unclipAutoBlend_"+unique_id).click(function(){
+    	console.log("unclip")
        var current_angle = mix_canvas['_objects'][1]['angle'];
        var new_angle = 0;
        if(mix_canvas['_objects'][1]['reversed'] == undefined || mix_canvas['_objects'][1]['reversed'] == false){

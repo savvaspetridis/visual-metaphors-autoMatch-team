@@ -47,7 +47,6 @@ Template.insertImages1filter.helpers({
 
     duplicates = Session.get('duplicates');
     to_delete = Session.get('delete');
-    console.log('duplicate: ' + String(duplicates))
     var duplicate_image_url = 0;
     if(duplicates != undefined && duplicates != 'none'){
         console.log(Images1.find({_id:duplicates}).fetch()[0])
@@ -60,8 +59,7 @@ Template.insertImages1filter.helpers({
     }
 
     images = Images1.find({concept:concept}, {sort: {timestamp: -1}}).fetch();
-    console.log(images)
-
+    
     Session.set('duplicates','none');
 
     return images;
@@ -78,6 +76,42 @@ Template.insertImages1filter_header.helpers({
         var concept = Router.current().params.concept1
         return Images1.find({concept:concept}).fetch().length
     },
+
+    count_circles: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "circle"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_spheres: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "sphere"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_rectangles: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "rectangle"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_boxes: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "box"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_cylinders: function(){
+        var concept = Router.current().params.concept1
+        var this_shape = "cylinder"
+        return Images1.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_whole: function(){
+        var concept = Router.current().params.concept1
+        var this_complexity = "whole"
+        return Images1.find({concept:concept, complexity: this_complexity}).fetch().length
+    },
+    count_part: function(){
+        var concept = Router.current().params.concept1
+        var this_complexity = "part"
+        return Images1.find({concept:concept, complexity: this_complexity}).fetch().length
+    }
 })
 
 Template.insertImages1filter_headerOnly.helpers({

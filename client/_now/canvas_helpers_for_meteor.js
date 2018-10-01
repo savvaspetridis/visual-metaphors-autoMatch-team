@@ -190,27 +190,35 @@ reverse_image = function(mix_canvas, concept1, concept2, image1_id, image2_id){
 }
 
 
-save_mix_canvas = function(mix_canvas, concept1, concept2, image1_id, image2_id){
+save_mix_canvas = function(mix_canvas, concept1, concept2, image1_id, image2_id, whichImageIsFirst){
         //console.log('427 save mix canvas')
         var metaphorPair_id = Router.current().params.metaphorPair_id
         //var concept1 = Router.current().params.concept1
         //var concept2 = Router.current().params.concept2
+        console.log("image1_id", image1_id, concept1)
+        console.log("image2_id", image2_id, concept2)
+        //console.log(mix_canvas)
 
+        console.log("whichImageIsFirst", whichImageIsFirst)
 
-        // need to save 
-        // imageA db object or id (the name of the object?) - what if it disappears?
-        // imageA canvas data 
-        //var image1_id = Session.get("image1_selected_obj_id")
-         var image1_canvas_data = Images1.findOne(image1_id).canvas_data 
-        var image1_drawnShape =  getDrawnShapeFromCanvas(image1_canvas_data)  //Session.get("image1_selected_obj_drawnShape")        
-        
+        var image1_canvas_data = undefined
+        var image1_drawnShape = undefined
+        var image2_canvas_data = undefined
+        var image2_drawnShape = undefined
 
-        //imageB obj id
-        
-        //var image2_id = image2_id
-        var image2_canvas_data = Images2.findOne(image2_id).canvas_data
-        var image2_drawnShape = getDrawnShapeFromCanvas(image2_canvas_data)  
+        if(whichImageIsFirst == "Images1_first"){
+            var image1_canvas_data = Images1.findOne(image1_id).canvas_data 
+            var image1_drawnShape =  getDrawnShapeFromCanvas(image1_canvas_data)                   
 
+            var image2_canvas_data = Images2.findOne(image2_id).canvas_data
+            var image2_drawnShape = getDrawnShapeFromCanvas(image2_canvas_data)  
+        }else if(whichImageIsFirst == "Images2_first"){
+            var image1_canvas_data = Images2.findOne(image1_id).canvas_data 
+            var image1_drawnShape =  getDrawnShapeFromCanvas(image1_canvas_data)                   
+
+            var image2_canvas_data = Images1.findOne(image2_id).canvas_data
+            var image2_drawnShape = getDrawnShapeFromCanvas(image2_canvas_data) 
+        }
         
 
 

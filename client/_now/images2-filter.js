@@ -52,6 +52,42 @@ Template.insertImages2filter_header.helpers({
         var concept = Router.current().params.concept2
         return Images2.find({concept:concept}).fetch().length
     },
+
+    count_circles: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "circle"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_spheres: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "sphere"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_rectangles: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "rectangle"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_boxes: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "box"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_cylinders: function(){
+        var concept = Router.current().params.concept2
+        var this_shape = "cylinder"
+        return Images2.find({concept:concept, shape: this_shape}).fetch().length
+    },
+    count_whole: function(){
+        var concept = Router.current().params.concept2
+        var this_complexity = "whole"
+        return Images2.find({concept:concept, complexity: this_complexity}).fetch().length
+    },
+    count_part: function(){
+        var concept = Router.current().params.concept2
+        var this_complexity = "part"
+        return Images2.find({concept:concept, complexity: this_complexity}).fetch().length
+    }
 })
 
 Template.insertImages2filter_headerOnly.helpers({

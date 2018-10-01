@@ -1,7 +1,54 @@
 Template.addAndShowConceptPairs.helpers({
+    'control': function(){
+        return true
+    },
+
     'metaphor_pairs': function(){
         return MetaphorPairs.find()
     },
+
+                //unused A's
+            // summer?
+            // winter?
+            // philosophy
+            // women
+            // lego
+            // mcdonalds
+
+            //unused Bs:
+            //healthy
+            //fashion
+    'pairs_a': function(){
+        var ids = [
+            // WARM UP
+            'esfhnaXuGzxe2HESo', //apple + energy
+
+            //SET 1
+            'LEXxNp9rQst8evWWx', //McDonalds + Dangerous
+            'N9eJPKf47TvkB3QP5', //bicycle + smart
+            'xHTsx9ecAp4bPbXQc', //Football + autumn           
+
+        ]
+        //return MetaphorPairs.find({_id:{$in: ids}})
+        
+        var metaphor_pairs_a = [ MetaphorPairs.findOne(ids[0]), MetaphorPairs.findOne(ids[1]), MetaphorPairs.findOne(ids[2]),MetaphorPairs.findOne(ids[3]),]
+        return metaphor_pairs_a
+    },
+
+    'pairs_b': function(){
+        var ids = [
+            // WARM UP
+            'esfhnaXuGzxe2HESo', //apple + energy
+
+            // SET 2
+            'rRufFQKfzyN2uZZhW', //Joe's + morning
+            'Sfdsz6YzhuEqQcd6N', //NYC + night            
+            'd5F26oj4rh9Pq2d9N', //Columbia + CS
+        ]
+        var metaphor_pairs_a = [ MetaphorPairs.findOne(ids[0]), MetaphorPairs.findOne(ids[1]), MetaphorPairs.findOne(ids[2]),MetaphorPairs.findOne(ids[3]),]
+        return metaphor_pairs_a
+    },
+
 })
 
 
@@ -21,7 +68,12 @@ Template.addAndShowConceptPairs.events({
         MetaphorPairs.insert(concept_pair); 
     },
 
-
+    'click #visualBlends': function(){
+        Router.go("/instructions/visualBlends") 
+    },
+    'click #blendImages': function(){
+        Router.go("/instructions/blendImages") 
+    },
 
 
     'click .go': function(){

@@ -23,6 +23,54 @@
 </template>
 
 <template name="addAndShowConceptPairs">
+    {{#if control}}
+        <h1>Intro</h1>
+            <button id="visualBlends" class="go btn btn-primary homepagebutton" > Introduction to Visual Blends</button><br>
+            <br>
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1l6esGdPiJEtNY392tQP2Q-jrDDUh6w59"> Slides 2025</a><br>-->
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1LX6beWBqrB_Oh7OHheifEBwSONk5PKLa"> Slides 2045</a><br>-->
+            <!-- <a target="_blank" href="https://drive.google.com/drive/u/1/folders/1HzEqAUFCmrc23vgf8zdM0h1j7Jb4PaFQ"> Slides 2065</a><br>-->
+            <!--  <a target="_blank" href="https://drive.google.com/drive/u/1/folders/1kySWYh9mVmu6RdFy39rR8dsQ4cquViXK"> Slides 2085</a><br>-->
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1yA4Mayx91jEkWsFQrX0xRHXwFo9tko9R"> Slides 2105</a><br>-->
+
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1D3uGDx83dkNlLEFmJrDrqZ-DQ4J0Of-1"> Slides 2125</a><br>-->
+            <a target="_blank" href="https://drive.google.com/drive/u/1/folders/1t-79VT6pfBPAUkz944QqRHTDz1-mwyC3"> Slides 2145</a><br>
+
+            <br>
+            <button id="blendImages" class="go btn btn-primary homepagebutton" > Blend Images</button><br>
+        {{#each pairs_b}}
+            <button class="go btn btn-info autoBlend homepageButton" data-concept1="{{concept1}}" data-concept2="{{concept2}}">{{_id}}</button> <br>
+        {{/each}}
+
+    {{else}}
+    
+
+            <h1>Intro</h1>
+            <button id="visualBlends" class="go btn btn-primary homepagebutton" > Introduction to Visual Blends</button><br>
+           
+            <button id="blendImages" class="go btn btn-primary homepagebutton" > Blend Images</button><br>
+            
+            {{#each pairs_a}}
+                <button class="go btn btn-info autoBlend homepageButton" data-concept1="{{concept1}}" data-concept2="{{concept2}}">{{_id}}</button> <br>
+            {{/each}}
+            <br>
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1hbdp_K-AQAQUq9f421rlVFngbALVPwBb"> Slides 2015</a><br>-->
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1RFUatFJgn3RhPZt_z12Gtz13o73kk-5C"> Slides 2035</a><br>-->
+
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1m7ElZDMdyjbta0to8wSHHCxEzruZc4Mt"> Slides 2055</a><br>-->
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1Zmx-xKSOdoV8Zq0AOIBtzPbyMxVXCfPu"> Slides 2075</a><br>-->
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1mUnDGR3mxgCbky4j9iiM2rrQhlPxd5pk"> Slides 2095</a><br>-->
+
+            <!--<a target="_blank" href="https://drive.google.com/drive/u/1/folders/1inWTj2nSAVvKWJpnF2R_ptevK0-QhPJa"> Slides 2115</a><br>-->
+            <a target="_blank" href="https://drive.google.com/drive/u/1/folders/1BoMYG-XLMcGxqnklIQKIpj6NGtMSpWFM"> Slides 2135</a><br>
+            
+    <br>
+    
+
+
+
+    {{/if}}
+<!--
            <form class = "new-pair">
             <h3>Add a new combination!</h3>
               Concept 1: <input type="concept1" name="concept1">
@@ -34,6 +82,7 @@
             {{#each metaphor_pairs}}
               <button class="go btn btn-info autoBlend homepageButton" data-concept1="{{concept1}}" data-concept2="{{concept2}}">{{concept1}} + {{concept2}}</button><br>
             {{/each}}
+        -->
 </template>
 
 
@@ -46,17 +95,7 @@
 
             
 <div class="row">
-        <div class='col-md-6'></div>
-        <div class='col-md-6'>
-            <h1>Savvas Intro</h1>
-            <button id="visualBlends" class="go btn primary homepagebutton" > Introduction to Visual Blends</button><br>
-            <button id="identifyShapes" class="go btn primary homepagebutton" > Identifying Shapes</button><br>
-            <button id="shapeCoverage" class="go btn primary homepagebutton" > Shape Coverage: All or Most</button><br>
-            <button id="drawShapes" class="go btn primary homepagebutton" > Drawing Shapes</button><br>
-            <button id="blendImages" class="go btn primary homepagebutton" > Blend Images</button><br>
-            <button id="findImages" class="go btn homepagebutton" > Find Images</button><br>
-            <button id="enterImages" class="go btn homepagebutton" > Enter Images</button><br>
-        </div>
+
      </div>
 
 
@@ -65,186 +104,11 @@
 
 
 
-        <div class='col-md-6' id='conceptPairButtons'>
-
-<h1>Blends</h1>
- 
- 
-
-
-
-
-
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="Foo" data-concept2="Bar">Foo + Bar</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="fall">NYC + Fall</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="energy">NYC + energy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="fashion">NYC + fashion</button><br>
-             <!--
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-                -->
-
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="bicycle" data-concept2="fall">bicycle + Fall</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="bicycle" data-concept2="healthy">bicycle + healthy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="bicycle" data-concept2="energy">bicycle + energy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="bicycle" data-concept2="fashion">bicycle + fashion</button><br>
-             <!--
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-                -->       
-
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="legotoys" data-concept2="fall">lego + Fall</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="legotoys" data-concept2="healthy">lego + healthy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="legotoys" data-concept2="energy">lego + energy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="legotoys" data-concept2="fashion">lego + fashion</button><br>
-             <!--
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-                -->  
-
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="McDonalds" data-concept2="fall">McDonalds + Fall</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="McDonalds" data-concept2="healthy">McDonalds + healthy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="McDonalds" data-concept2="energy">McDonalds + energy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="McDonalds" data-concept2="fashion">McDonalds + fashion</button><br>
-             <!--
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-             <button class="go btn btn-info autoBlend homepageButton" data-concept1="NewYorkCity" data-concept2="healthy">NYC + healthy</button><br>
-                -->  
-
-
-
-
-
-
-
-
-        </div>
+        
     </div>
 
-    <!--
-    <div class="row">
-        <div class='col-md-3'><h1>Introduction aaa</h1></div>
-        <div class='col-md-6'>
-            <br>
-            <button id="findImages" class="go btn homepagebutton" > Find Images</button><br>
-            <button id="enterImages" class="go btn homepagebutton" > Enter Images</button><br>
-            
 
-        </div>
-    </div>
-
-    -->
-    <br>
-    <div class="row">
-
-        <!-- <div class='col-md-3'><h1>Activities</h1></div> -->
-        <div class='col-md-6'>
-            <!--
-            <button id="visualBlends" class="go btn primary homepagebutton" > Introduction to Visual Blends</button><br>
-            <button id="identifyShapes" class="go btn primary homepagebutton" > Identifying Shapes</button><br>
-            <button id="shapeCoverage" class="go btn primary homepagebutton" > Shape Coverage: All or Most</button><br>
-            <button id="drawShapes" class="go btn primary homepagebutton" > Drawing Shapes</button><br>
-            <button id="blendImages" class="go btn primary homepagebutton" > Blend Images</button><br>
-            -->
-            <!-- Alon -->
-            <!--
-            <br>            
-            
-            <button id="findImagesC" class="go btn btn-primary findImagesExercise1 homepagebutton" data-concept="CocaCola"> Find Images: CocaCola</button><br>
-            <button id="findImagesD" class="go btn btn-primary findImagesExercise1 homepagebutton" data-concept="camera"> Find Images: Camera</button><br>
-            <br>
-            <br>
-            <button id="filterImages2A" class="go btn btn-primary filterImagesExercise2 homepagebutton" data-concept="fashion"> Annotate Images: Fashion</button><br>
-            <button id="filterImages2B" class="go btn btn-primary filterImagesExercise2 homepagebutton" data-concept="energy"> Annotate Images: Energy</button><br>
-            <br>
-            <br>
-            <br>
-            -->
-
-            <!-- Ishan -->
-            <!--
-            <br>
-            
-            <button id="findImagesC" class="go btn btn-primary findImagesExercise2 homepagebutton" data-concept="fashion"> Find Fashion: Fashion</button><br>
-            <button id="findImagesD" class="go btn btn-primary findImagesExercise2 homepagebutton" data-concept="energy"> Find Images: Energy</button><br>
-            <br>
-            <br>
-            <button id="filterImages2A" class="go btn btn-primary filterImagesExercise1 homepagebutton" data-concept="legotoys"> Annotate Images: Lego</button><br>
-            <button id="filterImages2B" class="go btn btn-primary filterImagesExercise1 homepagebutton" data-concept="McDonalds"> Annotate Images: McDonalds</button><br>
-            <br>
-            <br>
-            <br>
-            -->
-
-            <!-- Erica -->
-            <!--
-            <br>
-            <button id="findImagesC" class="go btn btn-primary findImagesExercise1 homepagebutton" data-concept="legotoys"> Find Images: Lego</button><br>
-            <button id="findImagesD" class="go btn btn-primary findImagesExercise1 homepagebutton" data-concept="McDonalds"> Find Images: McDonalds</button><br>
-            <br>
-            <br>
-            <button id="filterImages2A" class="go btn btn-primary filterImagesExercise1 homepagebutton" data-concept="NewYorkCity"> Annotate Images: New York City</button><br>
-            <button id="filterImages2B" class="go btn btn-primary filterImagesExercise1 homepagebutton" data-concept="bicycle"> Annotate Images: Bicycle</button><br>
-            -->
-
-
-
-
-            <!--
-            2. Katy
-            <br>
-            <button id="findImagesC" class="go btn btn-primary findImagesExercise1 homepagebutton" data-concept="NewYorkCity"> Find Images: New York City</button><br>
-            <button id="findImagesD" class="go btn btn-primary findImagesExercise1 homepagebutton" data-concept="bicycle"> Find Images: Bicycle</button><br>
-            
-
-            <button id="filterImages2A" class="go btn btn-primary filterImagesExercise2 homepagebutton" data-concept="fall"> Annotate Images: Fall</button><br>
-            <button id="filterImages2B" class="go btn btn-primary filterImagesExercise2 homepagebutton" data-concept="healthy"> Annotate Images: Healthy</button>
-            <br>
-            -->
-
-
-            <!--
-            1. Savvas
-            <button id="findImagesA" class="go btn btn-primary findImagesExercise homepagebutton" data-concept="fall"> Find Images: Fall</button><br>
-            <button id="findImagesB" class="go btn btn-primary findImagesExercise homepagebutton" data-concept="healthy"> Find Images: Healthy</button><br>
-            
-            -->
-
-
-            
-            
-        </div>
-    </div>
 
     
     <br>
 </template>
-
-<!--
-<template name="summarizeData">
-     <div class="row">
-        <div class='col-md-4'>
-           {{#each dataSummaryA}}
-                <div class="row">
-                    <div class='col-md-3'>{{title}}</div>
-                    <div class='col-md-3'>{{count}}</div>
-                </div>
-            {{/each}}            
-        </div>
-        <div class='col-md-4'>
-            {{#each dataSummaryB}}
-                <div class="row">
-                    <div class='col-md-3'>{{title}}</div>
-                    <div class='col-md-3'>{{count}}</div>
-                </div>
-            {{/each}}              
-        </div>
-     </div>
-
- 
-
-  
-
-</template>
--->
